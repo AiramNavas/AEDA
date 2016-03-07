@@ -7,17 +7,10 @@
 using namespace std;
 
 
-template<class TDATO> TDATO calculadora(istream& expresion);
-
 
 int main()
 {
 
-    char expresion[]="2 3 *";
-
-    AEDA::enteros A;
-
-    cout << A.resolver(expresion) << endl;
 
 
     return 0;

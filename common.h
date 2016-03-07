@@ -5,7 +5,7 @@
 #include <iomanip>
 
 using namespace std;
-typedef int TDATO;
+//typedef int TDATO;
 
 #endif // COMMON
 

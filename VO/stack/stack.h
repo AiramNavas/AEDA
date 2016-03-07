@@ -40,12 +40,12 @@ template <class TDATO>
 template <class TDATO>
     void stack_TDATO<TDATO>::push(TDATO i)
     {
-        list_.insert_beginning(new dll_int_node(i));
+        list_.insert_beginning(new dll_int_node<TDATO>(i));
     }
 template <class TDATO>
     TDATO stack_TDATO<TDATO>::pop(void)
     {
-        dll_int_node* n_aux = (dll_int_node*)(list_.extract_beginning());
+        dll_int_node<TDATO>* n_aux = (dll_int_node<TDATO>*)(list_.extract_beginning());
 
         TDATO aux = n_aux->get_data();
 
