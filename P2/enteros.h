@@ -3,10 +3,7 @@
 #include "../VO/stack/stack.h"
 #include "../common.h"
 #include "string.h"
-#include <vector>
-#include <cstdlib>
-#include <string>
-#include <stdexcept>
+
 
 namespace AEDA {
 
