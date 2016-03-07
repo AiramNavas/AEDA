@@ -20,5 +20,5 @@ HEADERS += \
     VO/queue/queue.h \
     VO/stack/stack.h \
     VO/vector/vector.h \
-    P2/enteros.h
+    P2/calculadora.h
 

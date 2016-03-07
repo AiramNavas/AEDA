@@ -1,5 +1,5 @@
-#ifndef ENTEROS_H
-#define ENTEROS_H
+#ifndef CALCULADORA_H
+#define CALCULADORA_H
 #include "../VO/stack/stack.h"
 #include "../common.h"
 #include "string.h"
@@ -11,14 +11,14 @@ namespace AEDA {
 
 template <class TDATO>
 
-class enteros
+class calculadora
 {
 private:
     stack_TDATO<TDATO> pila_;
 
 public:
-    enteros();
-    ~enteros();
+    calculadora();
+    ~calculadora();
 
     TDATO resolver(char *expresion);
     bool es_numero(char *pch);
@@ -28,16 +28,16 @@ public:
 
 template <class TDATO>
 
-enteros<TDATO>::enteros():
+calculadora<TDATO>::calculadora():
 pila_()
 {}
 template <class TDATO>
 
-enteros<TDATO>::~enteros()
+calculadora<TDATO>::~calculadora()
 {}
 
 template <class TDATO>
-TDATO enteros<TDATO>::resolver(char *expresion)
+TDATO calculadora<TDATO>::resolver(char *expresion)
 {
     // TESTEOS
     char *pch = NULL;
@@ -82,7 +82,7 @@ return pila_.pop();
 }
 template <class TDATO>
 
-bool enteros<TDATO>::es_numero(char *pch){
+bool calculadora<TDATO>::es_numero(char *pch){
     if (( ((*pch)>='0') && ((*pch)<='9') ) || ( ( (pch[1])>='0') && ((pch[1])<='9') ) )
         return true;
     else
@@ -96,4 +96,4 @@ bool enteros<TDATO>::es_numero(char *pch){
 
 }
 
-#endif // ENTEROS_H
+#endif // calculadora_H
