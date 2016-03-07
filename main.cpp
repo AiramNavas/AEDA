@@ -2,27 +2,23 @@
 #include "VO/queue/queue.h"
 #include "VO/stack/stack.h"
 #include "VO/vector/vector.h"
+#include "P2/enteros.h"
 
 using namespace std;
 
+
+template<class TDATO> TDATO calculadora(istream& expresion);
+
+
 int main()
 {
-    AEDA::queue A;
 
-    for (int i=0; i < 4; i++)
-    {
-        A.put(2+i);
-    }
+    char expresion[]="2 3 *";
 
-    A.write(cout);
+    AEDA::enteros A;
 
-    cout << A.get_size() << endl;
+    cout << A.resolver(expresion) << endl;
 
-    TDATO B = 9;
-
-    A.insert_middle(B);
-
-    A.write(cout);
 
     return 0;
 }

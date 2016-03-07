@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     Entities/node/dll_node.cpp \
     VO/queue/queue.cpp \
     VO/stack/stack.cpp \
-    VO/vector/vector.cpp
+    VO/vector/vector.cpp \
+    P2/enteros.cpp
 
 HEADERS += \
     Entities/list/dll.h \
@@ -18,5 +19,6 @@ HEADERS += \
     common.h \
     VO/queue/queue.h \
     VO/stack/stack.h \
-    VO/vector/vector.h
+    VO/vector/vector.h \
+    P2/enteros.h
 
