@@ -89,7 +89,7 @@ namespace AEDA {
         while (aux != NULL){
             aux->write(os);
             aux = aux->get_next();
-        }
+        }os << endl;
     }
 
     int dll::get_size()

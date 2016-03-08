@@ -10,7 +10,7 @@ SOURCES += main.cpp \
     VO/queue/queue.cpp \
     VO/stack/stack.cpp \
     VO/vector/vector.cpp \
-    P2/enteros.cpp
+    P2/calculadora.cpp
 
 HEADERS += \
     Entities/list/dll.h \
@@ -20,5 +20,6 @@ HEADERS += \
     VO/queue/queue.h \
     VO/stack/stack.h \
     VO/vector/vector.h \
+    P2/calculadora.h \
     P2/calculadora.h
 
