@@ -8,10 +8,7 @@
 
 namespace AEDA {
 
-// CLASE DE TESTEOS
-
 template <class TDATO>
-
 class calculadora
 {
 private:
@@ -29,12 +26,12 @@ public:
 
 
 template <class TDATO>
-
 calculadora<TDATO>::calculadora():
 pila_()
 {}
-template <class TDATO>
 
+
+template <class TDATO>
 calculadora<TDATO>::~calculadora()
 {}
 
@@ -70,6 +67,10 @@ TDATO calculadora<TDATO>::resolver(char *expresion)
                         break;
                     case '/':   operador=(left/right);
                         break;
+                    case '^':   operador=left;
+                                for(int i=1; i < real(right); i++)
+                                    operador*=(left);
+                        break;
                     default:
                         break;
                 }
@@ -96,8 +97,6 @@ bool calculadora<TDATO>::is_complex(const string& s){
         size_t found = s.find("i");
         return (found != string::npos);
 }
-
-
 
 }
 

@@ -5,12 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     Entities/list/dll.cpp \
-    Entities/node/dll_int_node.cpp \
-    Entities/node/dll_node.cpp \
-    VO/queue/queue.cpp \
-    VO/stack/stack.cpp \
-    VO/vector/vector.cpp \
-    P2/calculadora.cpp
+    Entities/node/dll_node.cpp
 
 HEADERS += \
     Entities/list/dll.h \

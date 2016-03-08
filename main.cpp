@@ -10,8 +10,7 @@ using namespace std;
 
 int main()
 {
-
-    char expresion[]="3 4.5 + 1 + -4i +";
+    char expresion[]="5.5 3 * 3 5i + +";
 
     string aux =(string)(expresion);
     size_t found = aux.find("i");
