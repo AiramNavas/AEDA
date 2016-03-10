@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    char expresion[]="5.5 3 * 3 5i + +";
+    char expresion[]="25 R 25 R +";
 
     string aux =(string)(expresion);
     size_t found = aux.find("i");
@@ -27,8 +27,6 @@ int main()
     }
     else
         cout << "Resultado: " << B.real() << endl;
-
-
     return 0;
 }
 

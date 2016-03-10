@@ -44,8 +44,8 @@ TDATO calculadora<TDATO>::resolver(char *expresion)
 
         while (pch != NULL){
             if (!is_complex(pch) && es_numero(pch)){
-                float aux = atof (pch);
-                TDATO aux2(aux,0.0);
+                float p_real = atof (pch);
+                TDATO aux2(p_real,0.0);
                 pila_.push(aux2);
             }
             else if(es_numero(pch)){
@@ -54,22 +54,27 @@ TDATO calculadora<TDATO>::resolver(char *expresion)
                 pila_.push(aux3);
             }
             else{
+
                 TDATO operador;
                 TDATO right = pila_.pop();
-                TDATO left = pila_.pop();
+                TDATO left;
+
+
 
                 switch (*pch){
-                    case '+':   operador=(left+right);
+                    case '+':   left = pila_.pop();
+                                operador=(left+right);
                         break;
-                    case '-':   operador=(left-right);
+                    case '-':   left = pila_.pop();
+                                operador=(left-right);
                         break;
-                    case '*':   operador=(left*right);
+                    case '*':   left = pila_.pop();
+                                operador=(left*right);
                         break;
-                    case '/':   operador=(left/right);
+                    case '/':   left = pila_.pop();
+                                operador=(left/right);
                         break;
-                    case '^':   operador=left;
-                                for(int i=1; i < real(right); i++)
-                                    operador*=(left);
+                    case 'R':   operador=(sqrt(right));
                         break;
                     default:
                         break;
