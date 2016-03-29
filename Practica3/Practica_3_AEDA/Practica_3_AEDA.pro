@@ -5,18 +5,25 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     Entities/list/dll.cpp \
-    Entities/node/dll_node.cpp
+    Entities/node/dll_node.cpp \
+    P3/numbers/complex_t.cpp \
+    P3/numbers/entero_t.cpp \
+    P3/numbers/rational_t.cpp \
+    P3/numbers/real_t.cpp \
+    P3/number_list/number_list.cpp
 
 HEADERS += \
     Entities/list/dll.h \
     Entities/node/dll_int_node.h \
     Entities/node/dll_node.h \
-    P2/calculadora.h \
     VO/queue/queue.h \
     VO/stack/stack.h \
     VO/vector/vector.h \
     common.h \
-    P2/complex_t.h \
-    P2/rational_t.h \
-    P2/number_t.h
-
+    Exceptions/exceptions.h \
+    P3/numbers/complex_t.h \
+    P3/numbers/entero_t.h \
+    P3/numbers/number_t.h \
+    P3/numbers/rational_t.h \
+    P3/numbers/real_t.h \
+    P3/number_list/number_list.h

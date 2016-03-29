@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <iomanip>
+#include <math.h>
 
 using namespace std;
-//typedef int TDATO;
 
 #endif // COMMON
 
