@@ -21,7 +21,10 @@ class number_list
 		~number_list();
 
 		bool is_number(char *pch);
-		bool is_complex(const string& s);
+		bool is_entero(const string& s);
+		bool is_real(const string& s);
+		bool is_rational(const string& s);
+		bool is_complex(char *pch);
 
 
 		ostream& write(ostream& os);

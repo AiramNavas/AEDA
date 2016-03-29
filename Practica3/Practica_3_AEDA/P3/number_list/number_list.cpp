@@ -11,27 +11,27 @@ number_list::number_list(char* expresion)
 
 	while (pch != NULL){
 
-		if (is_number(pch) && !is_complex(pch)){
+		if (is_number(pch) && is_entero(pch)){
+			int aux = atoi(pch);
+			number_t* n_aux = new entero_t (aux);
+			stack_.push(n_aux);
+		}
+		else if (is_number(pch) && is_real(pch)){
+			double aux = atof(pch);
+			number_t* n_aux = new real_t (aux);
+			stack_.push(n_aux);
+		}
+		else if (is_number(pch) && is_rational(pch)){
 			float aux = atof(pch);
 			number_t* n_aux = new rational_t (aux);
 			stack_.push(n_aux);
 		}
 		else if (is_number(pch) && is_complex(pch)){
-			float aux = atof(pch);
-			number_t* n_aux = new complex_t (0,aux);
+			double p_real, p_img;
+			sscanf(pch,"(%lf,%lf)",&p_real,&p_img);
+			number_t* n_aux = new complex_t (p_real,p_img);
 			stack_.push(n_aux);
 		}
-
-//		if (!is_complex(pch) && es_numero(pch)){
-//			float p_real = atof (pch);
-//			number_t* aux2(p_real);
-//			stack_.push(aux2);
-//		}
-//		else if(is_complex(pch) && es_numero(pch)){
-//			float p_imag = atof (pch);
-//			number_t* aux3(0,p_imag);
-//			stack_.push(aux3);
-//		}
 
 		pch = strtok (NULL, " ");
 	}
@@ -47,9 +47,31 @@ bool number_list::is_number(char *pch){
 		return false;
 }
 
-bool number_list::is_complex(const string& s){
-		size_t found = s.find("i");
+bool number_list::is_entero(const string& s){
+		size_t found = s.find(".");
+		if (found != string::npos)
+			return false;
+		else if (s[0] != '(')
+			return true;
+		else
+			return false;
+}
+
+bool number_list::is_real(const string& s){
+		size_t found = s.find(".");
 		return (found != string::npos);
+}
+
+bool number_list::is_rational(const string& s){
+		size_t found = s.find(".");
+		return (found != string::npos);
+}
+
+bool number_list::is_complex(char *pch){
+		if((pch[0])=='(')
+			return true;
+		else
+			return false;
 }
 
 ostream& number_list::write(ostream& os)

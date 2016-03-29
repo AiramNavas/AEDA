@@ -15,19 +15,20 @@ using namespace std;
 int main()
 {
 
-	char expresion[]="3 4i + 1 1i + *";
+	char expresion[]="(3,9) (9,8) + 5 * 2.3 /";
+
 
 	number_list lista(expresion);
 	lista.write(cout);
 
-	real_t a(3);
-	entero_t b(1);
-	try{
-		cout << a.toEntero()+b << endl;
-	}
-	catch (invalid_convertion_of_type& e){
-		cout << e.what() << endl;
-	}
+//	real_t a(3);
+//	entero_t b(1);
+//	try{
+//		cout << a.toEntero()+b << endl;
+//	}
+//	catch (invalid_convertion_of_type& e){
+//		cout << e.what() << endl;
+//	}
 
 //	try{
 //		AEDA::queue<int> A(5);
