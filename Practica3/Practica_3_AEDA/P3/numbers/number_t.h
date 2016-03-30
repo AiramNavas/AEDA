@@ -16,6 +16,11 @@ class number_t {
 		virtual const rational_t toRational() const = 0;
 		virtual const complex_t toComplex() const = 0;
 
+		virtual number_t* operator +(const number_t* n) const = 0;
+		virtual number_t* operator -(const number_t* n) const = 0;
+		virtual number_t* operator /(const number_t* n) const = 0;
+		virtual number_t* operator *(const number_t* n) const = 0;
+
 		virtual ostream& write(ostream& os) const = 0;
 };
 

@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     P3/numbers/entero_t.cpp \
     P3/numbers/rational_t.cpp \
     P3/numbers/real_t.cpp \
-    P3/number_list/number_list.cpp
+    P3/number_list/number_list.cpp \
+    P3/calculadora_numeros/calculadora_numeros.cpp
 
 HEADERS += \
     Entities/list/dll.h \
@@ -26,4 +27,5 @@ HEADERS += \
     P3/numbers/number_t.h \
     P3/numbers/rational_t.h \
     P3/numbers/real_t.h \
-    P3/number_list/number_list.h
+    P3/number_list/number_list.h \
+    P3/calculadora_numeros/calculadora_numeros.h

@@ -15,11 +15,19 @@ using namespace std;
 int main()
 {
 
-	char expresion[]="(3,9) (9,8) + 5 * 2.3 /";
+//	char expresion[]="(3,9) (9,8) + 5 * 2.3 /";
 
 
-	number_list lista(expresion);
-	lista.write(cout);
+//	number_list lista(expresion);
+//	lista.write(cout);
+
+number_t* a = new complex_t(6,6);
+number_t* b = new entero_t(2);
+cout << (*a)+b << endl;
+
+number_t* x = new real_t (8.4);
+number_t* y = new entero_t(3);
+cout << y->toReal()+x << endl;
 
 //	real_t a(3);
 //	entero_t b(1);

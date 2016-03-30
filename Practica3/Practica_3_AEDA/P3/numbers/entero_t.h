@@ -22,6 +22,11 @@ class entero_t: public number_t
 		const rational_t toRational() const;
 		const complex_t toComplex() const;
 
+		number_t* operator +(const number_t* n) const;
+		number_t* operator -(const number_t* n) const;
+		number_t* operator /(const number_t* n) const;
+		number_t* operator *(const number_t* n) const;
+
 		entero_t operator +(const entero_t& e) const;
 		entero_t operator -(const entero_t& e) const;
 		entero_t operator /(const entero_t& e) const;

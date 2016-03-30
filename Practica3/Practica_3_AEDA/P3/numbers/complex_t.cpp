@@ -10,38 +10,69 @@ complex_t::complex_t():
 	img_(0)
 {}
 
-
 complex_t::complex_t(double real):
 	real_(real),
 	img_(0)
 {}
-
 
 complex_t::complex_t(const complex_t& c):
 	real_(c.real()),
 	img_(c.img())
 {}
 
-
 complex_t::complex_t(double real, double img):
 	real_(real),
 	img_(img)
 {}
 
-
 complex_t::~complex_t()
 {}
-
 
 double complex_t::real() const
 {
 	return real_;
 }
 
-
 double complex_t::img() const
 {
 	return img_;
+}
+
+//	TO TYPE
+
+const entero_t complex_t::toEntero() const
+{
+	throw invalid_convertion_of_type();
+}
+
+const real_t complex_t::toReal() const
+{
+	throw invalid_convertion_of_type();
+}
+
+const rational_t complex_t::toRational() const
+{
+	throw invalid_convertion_of_type();
+}
+
+const complex_t complex_t::toComplex() const
+{
+	return complex_t(real_,img_);
+}
+
+//	SOBRECARGA DE OPERADOR - NUMERO CON NUMERO
+
+number_t* complex_t::operator +(const number_t* n) const{
+	return  new complex_t ((*this)+(n->toComplex()));
+}
+number_t* complex_t::operator -(const number_t* n) const{
+	return  new complex_t ((*this)-(n->toComplex()));
+}
+number_t* complex_t::operator /(const number_t* n) const{
+	return  new complex_t ((*this)/(n->toComplex()));
+}
+number_t* complex_t::operator *(const number_t* n) const{
+	return  new complex_t ((*this)*(n->toComplex()));
 }
 
 //	SOBRECARGA DE OPERADORES - COMPLEJO CON COMPLEJO
@@ -88,24 +119,6 @@ complex_t complex_t::operator %(const complex_t& c) const
 		return complex_t ((sqrt(raiz2)),(+(sqrt(raiz3))));
 	else
 		return complex_t ((sqrt(raiz2)),(-(sqrt(raiz3))));
-}
-
-//	TO TYPE
-
-const entero_t complex_t::toEntero() const{
-	throw invalid_convertion_of_type();
-}
-
-const real_t complex_t::toReal() const{
-	throw invalid_convertion_of_type();
-}
-
-const rational_t complex_t::toRational() const{
-	throw invalid_convertion_of_type();
-}
-
-const complex_t complex_t::toComplex() const{
-	return complex_t(real_,img_);
 }
 
 // IMPRESIÓN DE COMPLEJO

@@ -25,6 +25,11 @@ class complex_t: public number_t
 		const rational_t toRational() const;
 		const complex_t toComplex() const;
 
+		number_t* operator +(const number_t* n) const;
+		number_t* operator -(const number_t* n) const;
+		number_t* operator /(const number_t* n) const;
+		number_t* operator *(const number_t* n) const;
+
 		complex_t operator+(const complex_t& c) const;
 		complex_t operator-(const complex_t& c) const;
 		complex_t operator/(const complex_t& c) const;

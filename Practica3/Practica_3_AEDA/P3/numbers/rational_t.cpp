@@ -28,6 +28,43 @@ float rational_t::get_r() const
 	return rational_;
 }
 
+//	TO TYPE
+
+const entero_t rational_t::toEntero() const{
+	throw invalid_convertion_of_type();
+}
+
+const real_t rational_t::toReal() const{
+	throw invalid_convertion_of_type();
+}
+
+const rational_t rational_t::toRational() const{
+	return rational_t(rational_);
+}
+
+const complex_t rational_t::toComplex() const{
+	return complex_t(rational_,0);
+}
+
+//	SOBRECARGA DE OPERADOR - NUMERO CON NUMERO
+
+number_t* rational_t::operator +(const number_t* n) const
+{
+	return  new rational_t ((*this)+(n->toRational()));
+}
+number_t* rational_t::operator -(const number_t* n) const
+{
+	return  new rational_t ((*this)-(n->toRational()));
+}
+number_t* rational_t::operator /(const number_t* n) const
+{
+	return  new rational_t ((*this)/(n->toRational()));
+}
+number_t* rational_t::operator *(const number_t* n) const
+{
+	return  new rational_t ((*this)*(n->toRational()));
+}
+
 //	SOBRECARGA DE OPERADOR - RACIONAL CON RACIONAL
 
 
@@ -55,24 +92,6 @@ rational_t rational_t::operator /(const rational_t& r) const
 rational_t rational_t::operator *(const rational_t& r) const
 {
 	return (rational_*r.rational_);
-}
-
-//	TO TYPE
-
-const entero_t rational_t::toEntero() const{
-	throw invalid_convertion_of_type();
-}
-
-const real_t rational_t::toReal() const{
-	throw invalid_convertion_of_type();
-}
-
-const rational_t rational_t::toRational() const{
-	return rational_t(rational_);
-}
-
-const complex_t rational_t::toComplex() const{
-	return complex_t(rational_,0);
 }
 
 //	IMPRECIÓN DE RACIONALES
