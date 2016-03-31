@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Modificacion: e la / 0 quiere que dividir por 1 o no y se devuelve el error.
 
 int main()
 {
@@ -21,13 +22,23 @@ int main()
 //	number_list lista(expresion);
 //	lista.write(cout);
 
-number_t* a = new complex_t(6,6);
-number_t* b = new entero_t(2);
-cout << (*a)+b << endl;
+//	number_t* a = new complex_t(6,6);
+//	number_t* b = new entero_t(2);
+//	cout << (*a)+b << endl;
 
-number_t* x = new real_t (8.4);
-number_t* y = new entero_t(3);
-cout << y->toReal()+x << endl;
+//	number_t* x = new real_t (8.4);
+//	number_t* y = new entero_t(3);
+//	cout << y->toReal()+x << endl;
+
+
+//	number_t* a = new real_t(5.4);
+//	number_t* b = new entero_t(0);
+//	try{
+//		cout << (*a)/b << endl;
+//	}
+//	catch(division_zero_exception_t& e){
+//		cout << e.what() << endl;
+//	}
 
 //	real_t a(3);
 //	entero_t b(1);
@@ -38,19 +49,18 @@ cout << y->toReal()+x << endl;
 //		cout << e.what() << endl;
 //	}
 
+
 //	try{
-//		AEDA::queue<int> A(5);
-//		A.put(1);
-//		A.put(1);
-//		A.put(1);
-//		A.put(1);
-//		A.put(1);
-//		A.put(1);
+//		AEDA::stack<int> A(5);
+//		A.pop();
 //	}
 //	catch (out_of_mem_exception_t& e){
 //		cout << e.what() << endl;
 //	}
-//	catch (overflow_queue_exception_t& e){
+//	catch (overflow_stack_exception_t& e){
+//		cout << e.what() << endl;
+//	}
+//	catch (empty_stack_exception_t& e){
 //		cout << e.what() << endl;
 //	}
 

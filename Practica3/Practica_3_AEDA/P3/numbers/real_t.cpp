@@ -82,10 +82,18 @@ real_t real_t::operator -(const real_t& r) const
 
 real_t real_t::operator /(const real_t& r) const
 {
-	if (r.real_ == 0)
-		throw division_zero_exception_t();
-
-	return (real_/r.real_);
+	if (r.real_ == 0){
+		const real_t uno(1.0);
+		char respuesta = 'x';
+		cout << "Está intentando dividir por cero. ¿Quiere que se divida por 1?: (y)" << endl;
+		cin >> respuesta;
+		if (respuesta == 'y')
+			return (real_/uno.real_);
+		else
+			throw division_zero_exception_t();
+	}
+	else
+		return (real_/r.real_);
 }
 
 
