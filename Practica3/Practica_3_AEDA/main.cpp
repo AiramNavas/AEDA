@@ -26,10 +26,9 @@ int main()
 //	number_t* b = new entero_t(2);
 //	cout << (*a)+b << endl;
 
-//	number_t* x = new real_t (8.4);
-//	number_t* y = new entero_t(3);
-//	cout << y->toReal()+x << endl;
-
+	number_t* x = new real_t (8.3);
+	number_t* y = new entero_t(3);
+	cout << y->toReal()+x << endl;
 
 //	number_t* a = new real_t(5.4);
 //	number_t* b = new entero_t(0);
