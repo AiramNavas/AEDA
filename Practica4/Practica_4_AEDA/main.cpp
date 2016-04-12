@@ -6,11 +6,16 @@
 #include "Dispersion/Modulo/modulo.h"
 #include "Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.h"
 #include "Exploracion/Lineal/lineal.h"
+#include "Exploracion/Doble/doble.h"
+#include "Exploracion/Cuadratica/cuadratica.h"
+#include "Exploracion/Redispersion/redispersion.h"
 
 using namespace std;
 
 int main()
 {
+
+
 
 //DNI a(44444444);
 //DNI d(33333333);

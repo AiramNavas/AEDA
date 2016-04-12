@@ -1,16 +1,12 @@
 #include "redispersion.h"
 
 Redispersion::Redispersion()
-{
-
-}
+{}
 
 Redispersion::~Redispersion()
-{
+{}
 
-}
-
-unsigned int Redispersion::exploracion(const DNI& dni, int n) const
+unsigned int Redispersion::exploracion(int i) const
 {
-	return n+1;
+	return i+1;
 }

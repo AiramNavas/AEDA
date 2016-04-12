@@ -8,13 +8,13 @@
 using namespace std;
 
 
-class Lineal: public Explorasion
+class Lineal: public Exploracion
 {
 	public:
 		Lineal();
 		~Lineal();
 
-		unsigned int exploracion(const DNI& dni, int n) const;
+		unsigned int exploracion(int i) const;
 };
 
 #endif // LINEAL_H

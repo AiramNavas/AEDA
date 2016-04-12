@@ -6,8 +6,8 @@ Pseudo_Aleatorio::Pseudo_Aleatorio()
 Pseudo_Aleatorio::~Pseudo_Aleatorio()
 {}
 
-unsigned int Pseudo_Aleatorio::dispersion(const DNI& dni, int n) const
+unsigned int Pseudo_Aleatorio::dispersion(const DNI& dni, int i) const
 {
 	srand(dni.get_DNI());
-	return rand()%n;
+	return rand()%i;
 }

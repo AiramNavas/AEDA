@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class Doble: public Explorasion
+class Doble: public Exploracion
 {
 	public:
 		Doble();
 		~Doble();
 
-		unsigned int exploracion(const DNI& dni, int n) const;
+		unsigned int exploracion(int i) const;
 };
 
 #endif // DOBLE_H

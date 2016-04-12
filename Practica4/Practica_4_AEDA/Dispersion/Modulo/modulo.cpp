@@ -8,7 +8,7 @@ Modulo::~Modulo()
 {}
 
 
-unsigned int Modulo::dispersion(const DNI& dni, int n) const
+unsigned int Modulo::dispersion(const DNI& dni, int i) const
 {
-	return dni.get_DNI()%n;
+	return dni.get_DNI()%i;
 }

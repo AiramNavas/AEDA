@@ -1,17 +1,12 @@
 #include "lineal.h"
 
 Lineal::Lineal()
-{
-
-}
-
+{}
 
 Lineal::~Lineal()
-{
+{}
 
-}
-
-unsigned int Lineal::exploracion(const DNI& dni, int n) const
+unsigned int Lineal::exploracion(int i) const
 {
-	return n+1;
+	return i+1;
 }

@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class Redispersion: public Explorasion
+class Redispersion: public Exploracion
 {
 	public:
 		Redispersion();
 		~Redispersion();
 
-		unsigned int exploracion(const DNI& dni, int n) const;
+		unsigned int exploracion(int i) const;
 };
 
 #endif // REDISPERSION_H

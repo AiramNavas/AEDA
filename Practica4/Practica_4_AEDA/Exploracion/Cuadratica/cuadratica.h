@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class Cuadratica: public Explorasion
+class Cuadratica: public Exploracion
 {
 	public:
 		Cuadratica();
 		~Cuadratica();
 
-		unsigned int exploracion(const DNI& dni, int n) const;
+		unsigned int exploracion(int i) const;
 };
 
 #endif // CUADRATICA_H

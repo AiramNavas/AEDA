@@ -1,10 +1,10 @@
 #ifndef EXPLORACION
 #define EXPLORACION
 
-class Explorasion
+class Exploracion
 {
 	public:
-		virtual unsigned int explorasion(const DNI& dni, int n) const=0;
+		virtual unsigned int exploracion(int i) const=0;
 };
 
 #endif // EXPLORACION

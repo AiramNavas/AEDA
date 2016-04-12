@@ -1,16 +1,12 @@
 #include "cuadratica.h"
 
 Cuadratica::Cuadratica()
-{
-
-}
+{}
 
 Cuadratica::~Cuadratica()
-{
+{}
 
-}
-
-unsigned int Cuadratica::exploracion(const DNI& dni, int n) const
+unsigned int Cuadratica::exploracion(int i) const
 {
-	return n+1;
+	return i*i;
 }

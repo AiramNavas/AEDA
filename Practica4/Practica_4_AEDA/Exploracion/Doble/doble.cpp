@@ -1,16 +1,12 @@
 #include "doble.h"
 
 Doble::Doble()
-{
-
-}
+{}
 
 Doble::~Doble()
-{
+{}
 
-}
-
-unsigned int Doble::exploracion(const DNI& dni, int n) const
+unsigned int Doble::exploracion(int i) const
 {
-	return n+1;
+	return i*2;
 }
