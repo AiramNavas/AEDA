@@ -1,4 +1,5 @@
 #include <iostream>
+//#include <fstream>
 #include "DNI/dni.h"
 #include "Exceptions/exceptions.h"
 #include "Celda/celda.h"
@@ -9,15 +10,58 @@
 #include "Exploracion/Doble/doble.h"
 #include "Exploracion/Cuadratica/cuadratica.h"
 #include "Exploracion/Redispersion/redispersion.h"
+#include "TablaHash/tablahash.h"
 
 using namespace std;
 
 int main()
 {
+/*
+* Dispersion:
+*	1 = Modulo
+*	2 = Pseudo-Aleatoria
+*
+* Exploracion:
+*	1 = Lineal
+*	2 = Cuadratica
+*	3 = Doble
+*	4 = Redispersion
+*/
+
+DNI a(44444444);
+DNI d(33333333);
+DNI e(55555555);
+DNI f(44444454);
+TablaHash<DNI> TH(5,4,1,3);
+
+TH.insertar(a);
+TH.insertar(a);
+TH.insertar(a);
+TH.insertar(a);
+
+TH.insertar(e);
+TH.insertar(e);
+TH.insertar(e);
+TH.insertar(e);
 
 
+//TH.insertar(f);
+
+TH.insertar(d);
+
+TH.write(cout);
+
+
+if(TH.buscar(f))
+	cout << "Encontrado." << endl;
+else
+	cout << "No encontrado." << endl;
 
 //DNI a(44444444);
+//Dispersion* dsp;
+//dsp = new Modulo;
+//cout << dsp->dispersion(a,3) << endl;
+
 //DNI d(33333333);
 //DNI e(55555555);
 //DNI f(66666666);

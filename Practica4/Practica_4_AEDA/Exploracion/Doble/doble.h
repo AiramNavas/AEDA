@@ -13,6 +13,8 @@ class Doble: public Exploracion
 		Doble();
 		~Doble();
 
+		unsigned int funcion() const;
+
 		unsigned int exploracion(int i) const;
 };
 

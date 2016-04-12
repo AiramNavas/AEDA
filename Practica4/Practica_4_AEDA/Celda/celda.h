@@ -68,7 +68,7 @@ template <class T>
 ostream& Celda<T>::write(ostream& os)
 {
 	for(int i=0; i<counter_;i++)
-		os << bloque_[i] << endl;
+		os << "\t" << bloque_[i];
 	return os;
 }
 
@@ -99,8 +99,3 @@ bool Celda<T>::buscar_clave(T clave)
 
 
 #endif // CELDA
-
-/*
-
-
-*/
