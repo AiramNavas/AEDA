@@ -5,6 +5,7 @@
 #include "vector"
 #include "Dispersion/Modulo/modulo.h"
 #include "Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.h"
+#include "Exploracion/Lineal/lineal.h"
 
 using namespace std;
 
