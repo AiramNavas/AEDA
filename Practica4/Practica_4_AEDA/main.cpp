@@ -1,105 +1,85 @@
 #include <iostream>
 //#include <fstream>
 #include "DNI/dni.h"
-#include "Exceptions/exceptions.h"
-#include "Celda/celda.h"
-#include "vector"
-#include "Dispersion/Modulo/modulo.h"
-#include "Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.h"
-#include "Exploracion/Lineal/lineal.h"
-#include "Exploracion/Doble/doble.h"
-#include "Exploracion/Cuadratica/cuadratica.h"
-#include "Exploracion/Redispersion/redispersion.h"
 #include "TablaHash/tablahash.h"
 
 using namespace std;
 
 int main()
 {
-/*
-* Dispersion:
-*	1 = Modulo
-*	2 = Pseudo-Aleatoria
-*
-* Exploracion:
-*	1 = Lineal
-*	2 = Cuadratica
-*	3 = Doble
-*	4 = Redispersion
-*/
+	/*
+	* Dispersion:
+	*	1 = Modulo
+	*	2 = Pseudo-Aleatoria
+	*
+	* Exploracion:
+	*	1 = Lineal
+	*	2 = Cuadratica
+	*	3 = Doble
+	*	4 = Redispersion
+	*/
 
-DNI a(44444444);
-DNI d(33333333);
-DNI e(55555555);
-DNI f(44444454);
-TablaHash<DNI> TH(5,4,1,3);
+	int nCeldas = 17;
+	int nBloques = 4;
+	int dsp = 1;
+	int exp = 3;
+	double factor = 1.0;
 
-TH.insertar(a);
-TH.insertar(a);
-TH.insertar(a);
-TH.insertar(a);
+	string string_exp;
 
-TH.insertar(e);
-TH.insertar(e);
-TH.insertar(e);
-TH.insertar(e);
+	if(exp==1)
+		string_exp = "Lineal";
+	else if(exp==2)
+		string_exp = "Cuadrat";
+	else if(exp==3)
+		string_exp = "Doble";
+	else if(exp==4)
+		string_exp = "Redisp";
 
+///////////////////////////////////////////////////////////////	INSERTAR
 
-//TH.insertar(f);
+	TablaHash<DNI> TH(nCeldas,nBloques,dsp,exp);
+	int N = factor*nCeldas*nBloques;
+	int banco[2*N];
+	srand(time(0));
+	// Formula a + rand() % (b-a+1)
+	for(int i=0; i < 2*N; i++)
+	{
+		int num = 30000000 + rand()%(80000000-30000000+1);
+		if(i>0)
+		{
+			for(int j=0; j < i; j++)
+				if(num==banco[j])
+				{
+					num = 30000000 + rand()%(80000000-30000000+1);
+					j=-1;
+				}
+		}
+		banco[i]=num;
+	}
 
-TH.insertar(d);
+	for(int i=0; i < N; i++)
+	{
+		TH.insertar(banco[i]);
+	}
 
-TH.write(cout);
+///////////////////////////////////////////////////////////////	BUSCAR
 
+	for (int i=0; i < N; i++)
+	{
+		TH.buscar(banco[i]);
+	}
 
-if(TH.buscar(f))
-	cout << "Encontrado." << endl;
-else
-	cout << "No encontrado." << endl;
+///////////////////////////////////////////////////////////////	IMPRIMIR
 
-//DNI a(44444444);
-//Dispersion* dsp;
-//dsp = new Modulo;
-//cout << dsp->dispersion(a,3) << endl;
+	cout << "Celdas\t\tBloques\t\tExploración\tCarga\t\tPruebas" << endl;
+	cout << " " << nCeldas << "\t\t" << nBloques << "\t\t" << string_exp << "\t\t";
+	cout << factor << "\t\t" << N << endl;
+	cout << endl;
+	cout << endl;
 
-//DNI d(33333333);
-//DNI e(55555555);
-//DNI f(66666666);
+	TH.write(cout);
 
-
-//	Celda<DNI> a[2];
-//	a[0].resize(3);
-//	a[1].resize(3);
-
-//	a[0].insertar_clave(41111111);
-//	a[0].insertar_clave(42222222);
-//	a[0].insertar_clave(43333333);
-//	a[1].insertar_clave(44444444);
-
-
-//	if(a[0].buscar_clave(41111111))
-//		cout << "ENCONTRADA" << endl;
-//	else
-//		cout << "NO" << endl;
-
-//	cout << "*****************************" << endl;
-//	a[0].write(cout);
-//	cout << "*****************************" << endl;
-//	a[1].write(cout);
-//	cout << "*****************************" << endl;
-
-
-
-//	try{
-//		DNI A(540630430);
-//		DNI B(54063043);
-
-//		cout << A << endl;
-//		cout << B << endl;
-//	}
-//	catch (invalid_dni_t& e){
-//		cout << e.what() << endl;
-//	}
 
 	return 0;
 }

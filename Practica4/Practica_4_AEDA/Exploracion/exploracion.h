@@ -1,6 +1,9 @@
 #ifndef EXPLORACION
 #define EXPLORACION
 
+#include <iostream>
+using namespace std;
+
 class Exploracion
 {
 	public:
