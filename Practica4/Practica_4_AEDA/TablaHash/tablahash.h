@@ -96,7 +96,7 @@ bool TablaHash<T>::insertar(T clave)
 		intentos++;
 		while ((insertado == false) && (full_ != nCeldas_*nBloques_))
 		{
-			insertado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(i))%nCeldas_].insertar_clave(clave);
+			insertado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].insertar_clave(clave);
 			if (insertado) full_++;
 			else intentos++;
 			i++;
@@ -129,7 +129,7 @@ bool TablaHash<T>::buscar(T clave)
 		intentos++;
 		while ((encontrado == false) && (i != nCeldas_))
 		{
-			encontrado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(i))%nCeldas_].buscar_clave(clave);
+			encontrado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].buscar_clave(clave);
 			if(!encontrado) intentos++;
 			i++;
 		}
@@ -155,12 +155,7 @@ bool TablaHash<T>::buscar(T clave)
 template <class T>
 ostream& TablaHash<T>::write(ostream& os)
 {
-//	for(int i=0; i < nCeldas_; i++)
-//	{
-//		cout << "Celda " << i+1 << ": " << endl;
-//		tabla_[i].write(os);
-//		cout << endl;
-//	}
+
 	int media_Ins = (minimo_Ins_+maximo_Ins_)/2;
 	int media_Bus = (minimo_Bus_+maximo_Bus_)/2;
 	cout << "\tNúmero de Comparaciones" << endl;
@@ -169,6 +164,14 @@ ostream& TablaHash<T>::write(ostream& os)
 	cout << "Búsqueda" << "\t" << minimo_Bus_ << "\t" << media_Bus << "\t" << maximo_Bus_ << endl;
 	cout << "Inserción" << "\t" << minimo_Ins_ << "\t" << media_Ins << "\t" << maximo_Ins_ << endl;
 	cout << endl;
+
+	for(int i=0; i < nCeldas_; i++)
+	{
+		cout << "Celda " << i+1 << ": " << endl;
+		tabla_[i].write(os);
+		cout << endl;
+	}
+
 	return os;
 }
 

@@ -13,7 +13,7 @@ class Redispersion: public Exploracion
 		Redispersion();
 		~Redispersion();
 
-		unsigned int exploracion(int i) const;
+		unsigned int exploracion(const DNI& dni, int nCeldas, int i) const;
 };
 
 #endif // REDISPERSION_H

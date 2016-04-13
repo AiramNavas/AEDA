@@ -22,7 +22,7 @@ int main()
 	int nCeldas = 17;
 	int nBloques = 4;
 	int dsp = 1;
-	int exp = 3;
+	int exp = 4;
 	double factor = 1.0;
 
 	string string_exp;
@@ -70,6 +70,7 @@ int main()
 		TH.buscar(banco[i]);
 	}
 
+
 ///////////////////////////////////////////////////////////////	IMPRIMIR
 
 	cout << "Celdas\t\tBloques\t\tExploración\tCarga\t\tPruebas" << endl;
@@ -79,7 +80,6 @@ int main()
 	cout << endl;
 
 	TH.write(cout);
-
 
 	return 0;
 }

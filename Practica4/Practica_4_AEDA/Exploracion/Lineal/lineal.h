@@ -14,7 +14,7 @@ class Lineal: public Exploracion
 		Lineal();
 		~Lineal();
 
-		unsigned int exploracion(int i) const;
+		unsigned int exploracion(const DNI& dni, int nCeldas, int i) const;
 };
 
 #endif // LINEAL_H

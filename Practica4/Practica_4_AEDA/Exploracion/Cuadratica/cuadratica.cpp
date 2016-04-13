@@ -6,7 +6,7 @@ Cuadratica::Cuadratica()
 Cuadratica::~Cuadratica()
 {}
 
-unsigned int Cuadratica::exploracion(int i) const
+unsigned int Cuadratica::exploracion(const DNI& dni, int nCeldas, int i) const
 {
 	return i*i;
 }

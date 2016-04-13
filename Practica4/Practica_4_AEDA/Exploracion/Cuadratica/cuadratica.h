@@ -13,7 +13,7 @@ class Cuadratica: public Exploracion
 		Cuadratica();
 		~Cuadratica();
 
-		unsigned int exploracion(int i) const;
+		unsigned int exploracion(const DNI& dni, int nCeldas, int i) const;
 };
 
 #endif // CUADRATICA_H

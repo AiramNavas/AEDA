@@ -15,7 +15,7 @@ class Doble: public Exploracion
 
 		unsigned int funcion() const;
 
-		unsigned int exploracion(int i) const;
+		unsigned int exploracion(const DNI& dni, int nCeldas, int i) const;
 };
 
 #endif // DOBLE_H
