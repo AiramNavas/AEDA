@@ -5,12 +5,14 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     DNI/dni.cpp \
-    Dispersion/Modulo/modulo.cpp \
-    Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.cpp \
     Exploracion/Lineal/lineal.cpp \
     Exploracion/Doble/doble.cpp \
     Exploracion/Cuadratica/cuadratica.cpp \
-    Exploracion/Redispersion/redispersion.cpp
+    Exploracion/Redispersion/redispersion.cpp \
+    Dispersion/Modulo/modulo.cpp \
+    Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.cpp \
+    Dispersion/Modificacion/modificacion_d.cpp \
+    Exploracion/Modificacion/modificacion_e.cpp
 
 HEADERS += \
     TablaHash/tablahash.h \
@@ -24,5 +26,7 @@ HEADERS += \
     Exploracion/Lineal/lineal.h \
     Exploracion/Doble/doble.h \
     Exploracion/Cuadratica/cuadratica.h \
-    Exploracion/Redispersion/redispersion.h
+    Exploracion/Redispersion/redispersion.h \
+    Dispersion/Modificacion/modificacion_d.h \
+    Exploracion/Modificacion/modificacion_e.h
 

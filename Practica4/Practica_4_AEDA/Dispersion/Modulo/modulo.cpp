@@ -1,4 +1,4 @@
-#include "modulo.h"
+#include "Dispersion/Modulo/modulo.h"
 
 Modulo::Modulo()
 {}

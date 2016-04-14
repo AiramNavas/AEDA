@@ -7,23 +7,33 @@ using namespace std;
 
 int main()
 {
-	/*
-	* Dispersion:
-	*	1 = Modulo
-	*	2 = Pseudo-Aleatoria
-	*
-	* Exploracion:
-	*	1 = Lineal
-	*	2 = Cuadratica
-	*	3 = Doble
-	*	4 = Redispersion
-	*/
+/*
+* Dispersion:
+*	1 = Modulo
+*	2 = Pseudo-Aleatoria
+*	3 = Modificacion
+*
+* Exploracion:
+*	1 = Lineal
+*	2 = Cuadratica
+*	3 = Doble
+*	4 = Redispersion
+*	5 = Modificacion
+*
+*
+* F_D: = 0;
+* F_E: = Lineal, pero hacia atrás.
+*
+*
+*/
 
-	int nCeldas = 17;
-	int nBloques = 4;
+
+	int nCeldas = 100;
+	int nBloques = 2;
+	int nPruebas = 20;
 	int dsp = 1;
-	int exp = 4;
-	double factor = 1.0;
+	int exp = 1;
+	double factor = 0.5;
 
 	string string_exp;
 
@@ -35,8 +45,10 @@ int main()
 		string_exp = "Doble";
 	else if(exp==4)
 		string_exp = "Redisp";
+	else if(exp==5)
+		string_exp = "Modifi";
 
-///////////////////////////////////////////////////////////////	INSERTAR
+///////////////////////////////////////////////////////////////	BANCO DE PRUEBSA
 
 	TablaHash<DNI> TH(nCeldas,nBloques,dsp,exp);
 	int N = factor*nCeldas*nBloques;
@@ -58,24 +70,26 @@ int main()
 		banco[i]=num;
 	}
 
-	for(int i=0; i < N; i++)
-	{
-		TH.insertar(banco[i]);
-	}
+///////////////////////////////////////////////////////////////	INSERTAR
 
-///////////////////////////////////////////////////////////////	BUSCAR
+	for(int i=0; i < N; i++)
+		TH.insertar(banco[i],0);
+
+///////////////////////////////////////////////////////////////	ESTADÍSTICA INSERTAR
 
 	for (int i=0; i < N; i++)
-	{
-		TH.buscar(banco[i]);
-	}
+		TH.buscar(banco[i],0);
 
+///////////////////////////////////////////////////////////////	ESTADÍSTICA BUSCAR
+
+	for (int i=N; i < N+nPruebas; i++)
+		TH.buscar(banco[i],1);
 
 ///////////////////////////////////////////////////////////////	IMPRIMIR
 
 	cout << "Celdas\t\tBloques\t\tExploración\tCarga\t\tPruebas" << endl;
 	cout << " " << nCeldas << "\t\t" << nBloques << "\t\t" << string_exp << "\t\t";
-	cout << factor << "\t\t" << N << endl;
+	cout << factor << "\t\t" << nPruebas << endl;
 	cout << endl;
 	cout << endl;
 

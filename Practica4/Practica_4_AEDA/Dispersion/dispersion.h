@@ -11,7 +11,3 @@ class Dispersion
 };
 
 #endif // DISPERSION
-
-/*
-
-*/

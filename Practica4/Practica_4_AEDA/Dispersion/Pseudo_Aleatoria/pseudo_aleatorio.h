@@ -19,8 +19,3 @@ class Pseudo_Aleatorio: public Dispersion
 };
 
 #endif // PSEUDO_ALEATORIO_H
-
-/*
-
-
-*/

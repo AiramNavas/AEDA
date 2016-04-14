@@ -1,4 +1,4 @@
-#include "pseudo_aleatorio.h"
+#include "Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.h"
 
 Pseudo_Aleatorio::Pseudo_Aleatorio()
 {}

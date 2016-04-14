@@ -1,5 +1,6 @@
-#ifndef MODULO_H
-#define MODULO_H
+#ifndef MODIFICACION_D_H
+#define MODIFICACION_D_H
+
 
 #include <iomanip>
 #include <cmath>
@@ -9,13 +10,13 @@
 
 using namespace std;
 
-class Modulo: public Dispersion
+class Modificacion_D: public Dispersion
 {
 	public:
-		Modulo();
-		~Modulo();
+		Modificacion_D();
+		~Modificacion_D();
 
 		unsigned int dispersion(const DNI& dni, int n) const;
 };
 
-#endif // MODULO_H
+#endif // MODIFICACION_D_H

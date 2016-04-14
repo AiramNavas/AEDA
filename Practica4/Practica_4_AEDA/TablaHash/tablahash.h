@@ -5,11 +5,13 @@
 #include "Dispersion/dispersion.h"
 #include "Dispersion/Modulo/modulo.h"
 #include "Dispersion/Pseudo_Aleatoria/pseudo_aleatorio.h"
+#include "Dispersion/Modificacion/modificacion_d.h"
 #include "Exploracion/exploracion.h"
 #include "Exploracion/Lineal/lineal.h"
 #include "Exploracion/Doble/doble.h"
 #include "Exploracion/Cuadratica/cuadratica.h"
 #include "Exploracion/Redispersion/redispersion.h"
+#include "Exploracion/Modificacion/modificacion_e.h"
 #include "Celda/celda.h"
 
 template <class T>
@@ -31,8 +33,8 @@ class TablaHash
 		TablaHash(int nCeldas, int nBloques, int dsp, int exp);
 		~TablaHash();
 
-		bool insertar(T clave);
-		bool buscar(T clave);
+		bool insertar(T clave, int est);
+		bool buscar(T clave, int est);
 
 		ostream& write(ostream& os);
 };
@@ -72,6 +74,8 @@ TablaHash<T>::TablaHash(int nCeldas, int nBloques, int dsp, int exp):
 		dsp_ = new Modulo;
 	else if(dsp==2)
 		dsp_ = new Pseudo_Aleatorio;
+	else if(dsp==3)
+		dsp_ = new Modificacion_D;
 
 	if(exp==1)
 		exp_ = new Lineal;
@@ -81,73 +85,100 @@ TablaHash<T>::TablaHash(int nCeldas, int nBloques, int dsp, int exp):
 		exp_ = new Doble;
 	else if(exp==4)
 		exp_ = new Redispersion;
+	else if(exp==5)
+		exp_ = new Modificacion_E;
 }
 
 template <class T>
 TablaHash<T>::~TablaHash(){}
 
 template <class T>
-bool TablaHash<T>::insertar(T clave)
+bool TablaHash<T>::insertar(T clave, int est)
 {
 	int i=0;
 	bool insertado = false;
 	int intentos = 0;
+	int j = 0;
+	int estadistica = est;
+
 	if(!tabla_[(dsp_->dispersion(clave, nCeldas_))].insertar_clave(clave)){
-		intentos++;
-		while ((insertado == false) && (full_ != nCeldas_*nBloques_))
+		if (estadistica == 1) intentos++;
+		while ((insertado == false) && (full_ != nCeldas_*nBloques_) && (j != nCeldas_*nBloques_-1))
 		{
 			insertado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].insertar_clave(clave);
 			if (insertado) full_++;
-			else intentos++;
+			else if (estadistica == 1) intentos++;
 			i++;
+			j++;
 		}
 	}
 	else
 	{
-		intentos++;
+		if (estadistica == 1) intentos++;
 		insertado = true;
 		full_++;
 	}
-	if (minimo_Ins_ == 0)
-		minimo_Ins_ = intentos;
 
-	if(intentos > maximo_Ins_)
-		maximo_Ins_ = intentos;
-	else if (intentos < minimo_Ins_)
-		minimo_Ins_ = intentos;
+	if (estadistica == 1){
+		if (minimo_Ins_ == 0)
+			minimo_Ins_ = intentos;
 
+		if(intentos > maximo_Ins_)
+			maximo_Ins_ = intentos;
+		else if (intentos < minimo_Ins_)
+			minimo_Ins_ = intentos;
+	}
 	return insertado;
 }
 
 template <class T>
-bool TablaHash<T>::buscar(T clave)
+bool TablaHash<T>::buscar(T clave, int est)
 {
 	int i=0;
 	bool encontrado = false;
 	int intentos = 0;
+	int estadistica = est;
+	bool noencontrado = false;
 	if(!tabla_[(dsp_->dispersion(clave, nCeldas_))].buscar_clave(clave)){
 		intentos++;
-		while ((encontrado == false) && (i != nCeldas_))
+		intentos+=tabla_[(dsp_->dispersion(clave, nCeldas_))].get_repeticiones();
+		while ((encontrado == false) && (i != nCeldas_-1) && (noencontrado == false))
 		{
 			encontrado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].buscar_clave(clave);
-			if(!encontrado) intentos++;
+			if((!encontrado)){
+				intentos++;
+				intentos+=tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].get_repeticiones();
+				if ((tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].get_repeticiones()) < nBloques_)
+					noencontrado = true;
+			}
 			i++;
 		}
 	}
 	else
 	{
 		intentos++;
-		minimo_Bus_++;
+		intentos+=tabla_[(dsp_->dispersion(clave, nCeldas_))].get_repeticiones();
 		encontrado = true;
 	}
 
-	if (minimo_Bus_ == 0)
-		minimo_Bus_ = intentos;
+	if (estadistica == 1){
+		if (minimo_Bus_ == 0)
+			minimo_Bus_ = intentos;
 
-	if(intentos > maximo_Bus_)
-		maximo_Bus_ = intentos;
-	else if (intentos < minimo_Bus_)
-		minimo_Bus_ = intentos;
+		if(intentos > maximo_Bus_)
+			maximo_Bus_ = intentos;
+		else if (intentos < minimo_Bus_)
+			minimo_Bus_ = intentos;
+	}
+	else{
+		if (minimo_Ins_ == 0)
+			minimo_Ins_ = intentos;
+
+		if(intentos > maximo_Ins_)
+			maximo_Ins_ = intentos;
+		else if (intentos < minimo_Ins_)
+			minimo_Ins_ = intentos;
+	}
 
 	return encontrado;
 }
@@ -156,21 +187,22 @@ template <class T>
 ostream& TablaHash<T>::write(ostream& os)
 {
 
-	int media_Ins = (minimo_Ins_+maximo_Ins_)/2;
-	int media_Bus = (minimo_Bus_+maximo_Bus_)/2;
-	cout << "\tNúmero de Comparaciones" << endl;
-	cout << endl;
-	cout << "\t\tMínimo\tMedia\tMáximo" << endl;
-	cout << "Búsqueda" << "\t" << minimo_Bus_ << "\t" << media_Bus << "\t" << maximo_Bus_ << endl;
-	cout << "Inserción" << "\t" << minimo_Ins_ << "\t" << media_Ins << "\t" << maximo_Ins_ << endl;
-	cout << endl;
-
 	for(int i=0; i < nCeldas_; i++)
 	{
-		cout << "Celda " << i+1 << ": " << endl;
+		os << "Celda " << i+1 << ": " << endl;
 		tabla_[i].write(os);
-		cout << endl;
+		os << endl;
 	}
+	os << endl;
+	os << endl;
+	int media_Ins = (minimo_Ins_+maximo_Ins_)/2;
+	int media_Bus = (minimo_Bus_+maximo_Bus_)/2;
+	os << "\tNúmero de Comparaciones" << endl;
+	os << endl;
+	os << "\t\tMínimo\tMedia\tMáximo" << endl;
+	os << "Búsqueda" << "\t" << minimo_Bus_ << "\t" << media_Bus << "\t" << maximo_Bus_ << endl;
+	os << "Inserción" << "\t" << minimo_Ins_ << "\t" << media_Ins << "\t" << maximo_Ins_ << endl;
+	os << endl;
 
 	return os;
 }
