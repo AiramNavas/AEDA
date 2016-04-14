@@ -30,9 +30,9 @@ int main()
 
 	int nCeldas = 100;
 	int nBloques = 2;
-	int nPruebas = 20;
-	int dsp = 1;
-	int exp = 1;
+	int nPruebas = 2;
+	int dsp = 3;
+	int exp = 5;
 	double factor = 0.5;
 
 	string string_exp;

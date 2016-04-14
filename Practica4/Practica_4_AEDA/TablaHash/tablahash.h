@@ -106,8 +106,8 @@ bool TablaHash<T>::insertar(T clave, int est)
 		while ((insertado == false) && (full_ != nCeldas_*nBloques_) && (j != nCeldas_*nBloques_-1))
 		{
 			insertado = tabla_[(dsp_->dispersion(clave, nCeldas_)+exp_->exploracion(clave,nCeldas_,i))%nCeldas_].insertar_clave(clave);
-			if (insertado) full_++;
-			else if (estadistica == 1) intentos++;
+			if (insertado){ full_++;}
+			else if (estadistica == 1){ intentos++;}
 			i++;
 			j++;
 		}
