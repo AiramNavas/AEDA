@@ -9,6 +9,7 @@
 #include "Algoritmos_Ord/burbuja.h"
 #include "Algoritmos_Ord/shellsort.h"
 #include "Algoritmos_Ord/quicksort.h"
+#include "Algoritmos_Ord/mergesort.h"
 
 using namespace std;
 
@@ -134,6 +135,10 @@ void Ordenacion<T>::demostracion(T* secuencia, int tam, int algoritmo)
 		quickSort<T> v_quickSort;
 		v_quickSort.algoritmo(secuencia, tam, 1);
 	}
+	else if (algoritmo == 5){
+		mergeSort<T> v_mergeSort;
+		v_mergeSort.algoritmo(secuencia, tam, 1);
+	}
 }
 
 
@@ -168,6 +173,13 @@ void Ordenacion<T>::estadistica(T* secuencia, int tam, int i, int nPruebas)
 	quickSort<T> v_quickSort;
 	v_quickSort.algoritmo(aux, tam, 0);
 	M_[i][3] = v_quickSort.get_contador();
+
+	for(int k = 0; k < tam; k++)
+		aux[k] = secuencia[k];
+
+	mergeSort<T> v_mergeSort;
+	v_mergeSort.algoritmo(aux, tam, 0);
+	M_[i][4] = v_mergeSort.get_contador();
 
 	if (i == nPruebas-1)
 		esta_comparaciones();

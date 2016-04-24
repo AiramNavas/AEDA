@@ -7,16 +7,16 @@
 using namespace std;
 
 template <class T>
-void generar_v_aleatorio(T* secuencia, int tam)
+void generar_s_aleatorio(T* secuencia, int tam, int inicio, int final)
 {
 	srand(time(0));
 	// Formula a + rand() % (b-a+1)
 	for(int i=0; i < tam; i++){
-		T num = (2+rand()%(50-2+1));
+		T num = (inicio+rand()%(final-inicio+1));
 		if(i>0){
 			for(int j=0; j < i; j++)
 				if(num==secuencia[j]){
-					num = 2 + rand()%(50-2+1);
+					num = inicio + rand()%(final-inicio+1);
 					j=-1;
 				}
 		}
@@ -31,8 +31,8 @@ int main()
 
 	int nPruebas = 5;
 	int tam = 5;
-	int metodo = 2;
-	int algoritmo = 4;
+	int metodo = 1;
+	int algoritmo = 5;
 
 //////////////////////////////////////////////////////////		PRACTICA 5
 
@@ -40,20 +40,18 @@ int main()
 
 
 
-
-
 	int secuencia[tam];
 
 	if (metodo == 1)
 	{
-		generar_v_aleatorio(secuencia, tam);
+		generar_s_aleatorio(secuencia, tam, 1, 50);
 		ordena.demostracion(secuencia, tam, algoritmo);
 	}
 
 	if (metodo == 2){
 		for (int i = 0; i < nPruebas; i++)
 		{
-			generar_v_aleatorio(secuencia, tam);
+			generar_s_aleatorio(secuencia, tam, 1, 50);
 			ordena.estadistica(secuencia, tam, i, nPruebas);
 			for(int k = 0; k < tam; k++)
 				cout << secuencia[k] << "  ";
