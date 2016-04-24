@@ -50,6 +50,7 @@ int main()
 
 	if (metodo == 2) cin.ignore();
 
+
 	if (metodo == 1)
 	{
 		generar_s_aleatorio(secuencia, tam, 30000000, 80000000);
