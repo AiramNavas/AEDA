@@ -10,6 +10,7 @@
 #include "Algoritmos_Ord/shellsort.h"
 #include "Algoritmos_Ord/quicksort.h"
 #include "Algoritmos_Ord/mergesort.h"
+#include "Algoritmos_Ord/selectionsort.h"
 
 using namespace std;
 
@@ -49,7 +50,7 @@ Ordenacion<T>::Ordenacion(int nPruebas):
 	M_ = new int* [nPruebas_];
 
 	for (int i = 0; i < nPruebas_; i++)
-		M_[i] = new int [5];
+		M_[i] = new int [7];
 }
 
 template <class T>
@@ -59,7 +60,7 @@ Ordenacion<T>::~Ordenacion()
 		delete [] M_[i];
 	delete [] M_;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 		delete [] ME_[i];
 	delete [] ME_;
 
@@ -101,18 +102,18 @@ float Ordenacion<T>::get_med(int j)
 template <class T>
 void Ordenacion<T>::esta_comparaciones()
 {
-	ME_ = new float* [5];
+	ME_ = new float* [7];
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 		ME_[i] = new float [3];
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 		ME_[i][2] = get_max(i);
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 		ME_[i][0] = get_min(i);
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 		ME_[i][1] = get_med(i);
 }
 
@@ -138,6 +139,10 @@ void Ordenacion<T>::demostracion(T* secuencia, int tam, int algoritmo)
 	else if (algoritmo == 5){
 		mergeSort<T> v_mergeSort;
 		v_mergeSort.algoritmo(secuencia, tam, 1);
+	}
+	else if (algoritmo == 6){
+		selectionSort<T> v_selectionSort;
+		v_selectionSort.algoritmo(secuencia, tam, 1);
 	}
 }
 
@@ -181,6 +186,13 @@ void Ordenacion<T>::estadistica(T* secuencia, int tam, int i, int nPruebas)
 	v_mergeSort.algoritmo(aux, tam, 0);
 	M_[i][4] = v_mergeSort.get_contador();
 
+	for(int k = 0; k < tam; k++)
+		aux[k] = secuencia[k];
+
+	selectionSort<T> v_selectionSort;
+	v_selectionSort.algoritmo(aux, tam, 0);
+	M_[i][4] = v_selectionSort.get_contador();
+
 	if (i == nPruebas-1)
 		esta_comparaciones();
 }
@@ -190,9 +202,9 @@ ostream& Ordenacion<T>::write(ostream &os)
 {
 	os << endl;
 	for (int i = 0; i < nPruebas_; i++){
-		for (int j = 0; j < 5; j++){
+		for (int j = 0; j < 7; j++){
 			os << M_[i][j] << "\t";
-			if (j == 4)
+			if (j == 6)
 				os << endl;
 		}
 	}
@@ -202,17 +214,12 @@ ostream& Ordenacion<T>::write(ostream &os)
 	os << "\033[4m" << "\t\tMínimo\tMedio\tMáximo" << "\033[0m" << endl;
 	os << endl;
 
-	for (int i = 0; i < 5; i++){
+	for (int i = 0; i < 7; i++){
 		os << "Método " << i+1 << "\t";
 		for (int j = 0; j < 3; j++)
 			os << ME_[i][j] << "\t";
 		os << endl;
 	}
-//	for(int i = 0; i < nPruebas_; i++)
-//	{
-//		os << "Método " << i+1 << "\t";
-//		os << M_[i][0] << endl;
-//	}
 
 	return os;
 }

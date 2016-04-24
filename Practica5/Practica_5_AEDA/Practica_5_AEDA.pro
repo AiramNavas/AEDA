@@ -14,5 +14,6 @@ HEADERS += \
     Algoritmos_Ord/burbuja.h \
     Algoritmos_Ord/shellsort.h \
     Algoritmos_Ord/quicksort.h \
-    Algoritmos_Ord/mergesort.h
+    Algoritmos_Ord/mergesort.h \
+    Algoritmos_Ord/selectionsort.h
 

@@ -11,6 +11,7 @@ class quickSort
 {
 	private:
 		int contador_;
+		int tam_;
 	public:
 		quickSort();
 		~quickSort();
@@ -24,7 +25,8 @@ class quickSort
 
 template <class T>
 quickSort<T>::quickSort():
-	contador_(0)
+	contador_(0),
+	tam_(0)
 {}
 
 template <class T>
@@ -43,6 +45,7 @@ template <class T>
 void quickSort<T>::algoritmo(T* secuencia, int tam, int metodo)
 {
 	contador_ = 0;
+	tam_=tam;
 	do_quickSort(secuencia, 0, tam-1, metodo);
 }
 
@@ -60,6 +63,7 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 		while (secuencia[i] < pivot)
 		{
 			if (metodo == 1){
+				cout << "1" << endl;
 				write(cout, secuencia, ini, fin, i, p, p);
 				cin.ignore();
 			}
@@ -68,6 +72,7 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 			i++;
 		}
 		if (metodo == 1){
+			cout << "2" << endl;
 			write(cout, secuencia, ini, fin, i, p, p);
 			cin.ignore();
 		}
@@ -107,7 +112,7 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 			f--;
 
 			if (metodo == 1){
-				write(cout, secuencia, 0, 4, -1, -1, -1);
+				write(cout, secuencia, 0, tam_-1, -1, -1, -1);
 				cin.ignore();
 			}
 		}
