@@ -19,10 +19,11 @@ class mergeSort
 		int get_contador();
 		void algoritmo(T* secuencia, int tam, int metodo);
 
-		void do_mergeSort(T* secuencia, int ini, int fin);
-		void mezcla(T* secuencia, int ini, int cen, int fin);
+		void do_mergeSort(T* secuencia, int ini, int fin, int metodo);
+		void mezcla(T* secuencia, int ini, int cen, int fin, int metodo);
 
 		ostream& write(ostream& os, T* secuencia, int tam, int j, int k);
+		ostream& write2(ostream& os, T* secuencia, int j, int ini, int fin);
 };
 
 template <class T>
@@ -48,25 +49,29 @@ template <class T>
 void mergeSort<T>::algoritmo(T* secuencia, int tam, int metodo)
 {
 	tam_ = tam;
-	do_mergeSort(secuencia, 0, tam-1);
-	if(metodo == 1)
-		write(cout, secuencia, tam, -1, -1);
+	do_mergeSort(secuencia, 0, tam-1, metodo);
 }
 
 template <class T>
-void mergeSort<T>::do_mergeSort(T* secuencia, int ini, int fin)
+void mergeSort<T>::do_mergeSort(T* secuencia, int ini, int fin, int metodo)
 {
 	if (ini < fin)
 	{
 		int cen = (ini+fin)/2;
-		do_mergeSort (secuencia, ini, cen);
-		do_mergeSort (secuencia, cen+1, fin);
-		mezcla (secuencia, ini, cen, fin);
+
+		if(metodo == 1){
+			write2(cout, secuencia, cen, ini, fin);
+			cin.ignore();
+		}
+
+		do_mergeSort (secuencia, ini, cen, metodo);
+		do_mergeSort (secuencia, cen+1, fin, metodo);
+		mezcla (secuencia, ini, cen, fin, metodo);
 	}
 }
 
 template <class T>
-void mergeSort<T>::mezcla(T* secuencia, int ini, int cen, int fin)
+void mergeSort<T>::mezcla(T* secuencia, int ini, int cen, int fin, int metodo)
 {
 	int i = ini;
 	int j = cen+1;
@@ -78,8 +83,12 @@ void mergeSort<T>::mezcla(T* secuencia, int ini, int cen, int fin)
 
 	while ((i <= cen) && (j <= fin))
 	{
-		write(cout, secuencia, tam_, i, j);
-		cin.ignore();
+		if(metodo == 1){
+			write(cout, secuencia, tam_, i, j);
+			cin.ignore();
+		}
+		else
+			contador_++;
 
 		if (secuencia[i] < secuencia[j])
 		{
@@ -91,11 +100,9 @@ void mergeSort<T>::mezcla(T* secuencia, int ini, int cen, int fin)
 			aux[k] = secuencia[j];
 			j++;
 		}
+
 		k++;
 	}
-
-	write(cout, secuencia, tam_, i, j);
-	cin.ignore();
 
 	if (i > cen){
 		while (j <= fin)
@@ -113,6 +120,11 @@ void mergeSort<T>::mezcla(T* secuencia, int ini, int cen, int fin)
 		}
 	}
 
+	if(metodo == 1){
+		write(cout, aux, tam_, -1, -1);
+		cout << endl;
+	}
+
 	for (int k = ini; k <= fin; k++)
 		secuencia[k] = aux[k];
 }
@@ -127,6 +139,32 @@ ostream& mergeSort<T>::write(ostream& os, T* secuencia, int tam, int j, int k)
 		else
 			cout << "[" << secuencia[i] << "] ";
 	}
+	os << endl;
+	return os;
+}
+
+template <class T>
+ostream& mergeSort<T>::write2(ostream& os, T* secuencia, int j, int ini, int fin)
+{
+	cout << "\33[4m";
+	for (int i = ini; i <= j; i++)
+	{
+		if (i != j)
+			cout << secuencia[i] << " ";
+		else
+			cout << secuencia[i];
+	}
+	cout << "\33[0m";
+	cout << " ";
+	cout << "\33[4m";
+	for (int i = j+1; i <= fin; i++)
+	{
+		if (i != fin)
+			cout << secuencia[i] << " ";
+		else
+			cout << secuencia[i];
+	}
+	cout << "\33[0m";
 	os << endl;
 	return os;
 }

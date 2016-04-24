@@ -30,28 +30,27 @@ int main()
 //////////////////////////////////////////////////////////		PEDIR POR PANTALLA
 
 	int nPruebas = 5;
-	int tam = 5;
-	int metodo = 1;
+	int tam = 25;
+	int metodo = 2;
 	int algoritmo = 5;
+
 
 //////////////////////////////////////////////////////////		PRACTICA 5
 
-	Ordenacion<int> ordena(nPruebas);
+	Ordenacion<DNI> ordena(nPruebas);
 
-
-
-	int secuencia[tam];
+	DNI secuencia[tam];
 
 	if (metodo == 1)
 	{
-		generar_s_aleatorio(secuencia, tam, 1, 50);
+		generar_s_aleatorio(secuencia, tam, 30000000, 80000000);
 		ordena.demostracion(secuencia, tam, algoritmo);
 	}
 
 	if (metodo == 2){
 		for (int i = 0; i < nPruebas; i++)
 		{
-			generar_s_aleatorio(secuencia, tam, 1, 50);
+			generar_s_aleatorio(secuencia, tam, 30000000, 80000000);
 			ordena.estadistica(secuencia, tam, i, nPruebas);
 			for(int k = 0; k < tam; k++)
 				cout << secuencia[k] << "  ";
