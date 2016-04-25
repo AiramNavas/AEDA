@@ -11,6 +11,7 @@
 #include "Algoritmos_Ord/quicksort.h"
 #include "Algoritmos_Ord/mergesort.h"
 #include "Algoritmos_Ord/selectionsort.h"
+#include "Algoritmos_Ord/heap.h"
 
 using namespace std;
 
@@ -144,6 +145,10 @@ void Ordenacion<T>::demostracion(T* secuencia, int tam, int algoritmo)
 		selectionSort<T> v_selectionSort;
 		v_selectionSort.algoritmo(secuencia, tam, 1);
 	}
+	else if (algoritmo == 7){
+		heap<T> v_heap;
+		v_heap.algoritmo(secuencia, tam, 1);
+	}
 }
 
 
@@ -191,7 +196,14 @@ void Ordenacion<T>::estadistica(T* secuencia, int tam, int i, int nPruebas)
 
 	selectionSort<T> v_selectionSort;
 	v_selectionSort.algoritmo(aux, tam, 0);
-	M_[i][4] = v_selectionSort.get_contador();
+	M_[i][5] = v_selectionSort.get_contador();
+
+	for(int k = 0; k < tam; k++)
+		aux[k] = secuencia[k];
+
+	heap<T> v_heap;
+	v_heap.algoritmo(aux, tam, 0);
+	M_[i][6] = v_heap.get_contador();
 
 	if (i == nPruebas-1)
 		esta_comparaciones();

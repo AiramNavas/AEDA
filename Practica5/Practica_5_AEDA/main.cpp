@@ -29,19 +29,21 @@ int main()
 
 //////////////////////////////////////////////////////////		PEDIR POR PANTALLA
 
+
 /*
- * Insercion..= 1
- * Burbuja....= 2
- * ShellSort..= 3
- * QuickSort..= 4
- * MergeSort..= 5
+ * Insercion.....= 1
+ * Burbuja.......= 2
+ * ShellSort.....= 3
+ * QuickSort.....= 4
+ * MergeSort.....= 5
+ * SelectionSort..=6
+ * Heap...........=7
 */
 
-	int nPruebas = 10;
-	int tam = 15;
-	int metodo = 2;
-	int algoritmo = 5;
-
+	int nPruebas = 5;
+	int tam = 5;
+	int metodo = 1;
+	int algoritmo = 7;
 
 //////////////////////////////////////////////////////////		PRACTICA 5
 

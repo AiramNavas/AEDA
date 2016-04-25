@@ -42,29 +42,22 @@ template <class T>
 void selectionSort<T>::algoritmo(T* secuencia, int tam, int metodo)
 {
 	contador_ = 0;
-	int k;
 	for (int i = 0; i < tam-1; i++)
 	{
-		k = i;
 		for (int j = i+1; j < tam; j++)
 		{
 			if (metodo == 1){
-				write(cout, secuencia, tam, k, k-1);
+				write(cout, secuencia, tam, i, j);
 				cin.ignore();
 			}
 			else
 				contador_++;
 
-			if ((secuencia[j] < secuencia[k]))
-			{
-				k=j;
+			if ((secuencia[i] > secuencia[j])){
 				T aux(secuencia[i]);
 				secuencia[i] = secuencia[j];
 				secuencia[j] = aux;
 			}
-			else
-				break;
-
 		}
 	}
 

@@ -63,7 +63,6 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 		while (secuencia[i] < pivot)
 		{
 			if (metodo == 1){
-				cout << "1" << endl;
 				write(cout, secuencia, ini, fin, i, p, p);
 				cin.ignore();
 			}
@@ -72,7 +71,6 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 			i++;
 		}
 		if (metodo == 1){
-			cout << "2" << endl;
 			write(cout, secuencia, ini, fin, i, p, p);
 			cin.ignore();
 		}

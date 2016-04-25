@@ -15,5 +15,6 @@ HEADERS += \
     Algoritmos_Ord/shellsort.h \
     Algoritmos_Ord/quicksort.h \
     Algoritmos_Ord/mergesort.h \
-    Algoritmos_Ord/selectionsort.h
+    Algoritmos_Ord/selectionsort.h \
+    Algoritmos_Ord/heap.h
 
