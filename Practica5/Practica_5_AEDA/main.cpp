@@ -4,12 +4,20 @@
 #include "Ordenacion/ordenacion.h"
 #include "Algoritmos_Ord/insercion.h"
 
+#define VALOR_MIN 30000000
+#define VALOR_MAX 80000000
+
 using namespace std;
 
 template <class T>
 void generar_s_aleatorio(T* secuencia, int tam, int inicio, int final)
 {
-	srand(time(0));
+	static int seed = 0;
+
+	if (seed==0)
+		seed = time(0);
+
+	srand(seed++);
 	// Formula a + rand() % (b-a+1)
 	for(int i=0; i < tam; i++){
 		T num = (inicio+rand()%(final-inicio+1));
@@ -41,41 +49,38 @@ int main()
 */
 
 	int nPruebas = 5;
-	int tam = 8;
+	int tam = 5;
 	int metodo = 2;
 	int algoritmo = 7;
+
 
 //////////////////////////////////////////////////////////		PRACTICA 5
 
 	Ordenacion<DNI> ordena(nPruebas);
 	DNI secuencia[tam];
 
-	if (metodo == 2) cin.ignore();
-
+	cout << "Predione ENTER para comenzar." << endl;
+	cin.ignore();
 
 	if (metodo == 1)
 	{
-//		int prueba [tam] = {44, 55, 12, 42, 94, 18, 06, 67};
-//		ordena.demostracion(prueba, tam, algoritmo);
-		generar_s_aleatorio(secuencia, tam, 30000000, 80000000);
+		generar_s_aleatorio(secuencia, tam, VALOR_MIN, VALOR_MAX);
 		ordena.demostracion(secuencia, tam, algoritmo);
+		int x;
+		cin >> x;
 	}
 
 	if (metodo == 2){
 		for (int i = 0; i < nPruebas; i++)
 		{
-			generar_s_aleatorio(secuencia, tam, 30000000, 80000000);
+			generar_s_aleatorio(secuencia, tam, VALOR_MIN, VALOR_MAX);
 			ordena.estadistica(secuencia, tam, i, nPruebas);
 			for(int k = 0; k < tam; k++)
 				cout << secuencia[k] << "  ";
 			cout << "Prueba" << i+1 << endl;
-			usleep(1000000);
 		}
-	}
-
-
-	if (metodo == 2)
 		ordena.write(cout);
+	}		
 
 	return 0;
 }

@@ -69,7 +69,8 @@ void heap<T>::algoritmo(T* secuencia, int tam, int metodo)
 		baja(1,secuencia,i-1, metodo);
 	}
 
-	write(cout, secuencia, tam, -1, -1);
+	if (metodo == 1)
+		write(cout, secuencia, tam, -1, -1);
 
 }
 
