@@ -41,8 +41,8 @@ int main()
 */
 
 	int nPruebas = 5;
-	int tam = 5;
-	int metodo = 1;
+	int tam = 8;
+	int metodo = 2;
 	int algoritmo = 7;
 
 //////////////////////////////////////////////////////////		PRACTICA 5
@@ -55,6 +55,8 @@ int main()
 
 	if (metodo == 1)
 	{
+//		int prueba [tam] = {44, 55, 12, 42, 94, 18, 06, 67};
+//		ordena.demostracion(prueba, tam, algoritmo);
 		generar_s_aleatorio(secuencia, tam, 30000000, 80000000);
 		ordena.demostracion(secuencia, tam, algoritmo);
 	}

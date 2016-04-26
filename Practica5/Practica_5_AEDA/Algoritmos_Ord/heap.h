@@ -12,6 +12,7 @@ class heap
 {
 	private:
 		int contador_;
+		int tam_;
 	public:
 		heap();
 		~heap();
@@ -19,12 +20,16 @@ class heap
 		int get_contador();
 		void algoritmo(T* secuencia, int tam, int metodo);
 
+		void baja(int i, T* secuencia, int tam, int metodo);
+
 		ostream& write(ostream& os, T* secuencia, int tam, int j, int k);
+		ostream& write2(ostream& os, T* secuencia, int ini, int fin, int ins);
 };
 
 template <class T>
 heap<T>::heap():
-	contador_(0)
+	contador_(0),
+	tam_(0)
 {}
 
 template <class T>
@@ -42,92 +47,84 @@ int heap<T>::get_contador()
 template <class T>
 void heap<T>::algoritmo(T* secuencia, int tam, int metodo)
 {
-	contador_ = 0;
-	for(int k = tam; k > 0; k--)
-	{
-		for(int i = 1; i <= k; i++)
-		{
-			T aux = secuencia[i-1];
-			int j=i/2;
-			while(j > 0)
-			{
-				if (metodo == 1){
-					write(cout, secuencia, tam, j-1, i-1);
-					cin.ignore();
-				}
-				else
-					contador_++;
+	tam_=tam;
 
-				if (secuencia[j-1] < aux){
-					secuencia[i-1] = secuencia[j-1];
-					i=j;
-					j=j/2;
-				}
-				else
-					break;
-			}
-			secuencia[i-1] = aux;
-		}
-		T temp = secuencia[0];
-		secuencia[0] = secuencia[k-1];
-		secuencia[k-1] = temp;
+	for (int i = tam/2; i > 0; i--)
+	{
+		if (metodo == 1)
+			write2(cout, secuencia, i, tam-1, 1);
+
+		baja(i, secuencia, tam, metodo);
 	}
+
+	for (int i = tam; i > 1; i--)
+	{
+		T x = secuencia[0];
+		secuencia[0] = secuencia[i-1];
+		secuencia[i-1] = x;
+
+		if (metodo == 1)
+			write2(cout, secuencia, 0, i-2, 0);
+
+		baja(1,secuencia,i-1, metodo);
+	}
+
 	write(cout, secuencia, tam, -1, -1);
-	/*
- *
- *  int A[max],j,item,temp,i,k,n;
-	cout<<"Ingresa la cantidad de elementos del arreglo: ";
-	cin>>n;
-	for(i=1;i<=n;i++)
-	cin >> A[i];
 
-	for(k=n;k>0;k--)
+}
+
+template <class T>
+void heap<T>::baja(int i, T* secuencia, int tam, int metodo)
+{
+	T x = secuencia[i-1];
+
+	int h, h1, h2;
+
+	while (2*i <= tam)
 	{
-		for(i=1;i<=k;i++)
+		h1 = 2*i;
+		h2 = h1+1;
+
+		if (metodo == 1 && h1 != tam)
 		{
-			item=A[i];
-			j=i/2;
-			while(j>0 && A[j]<item)
-			{
-				A[i]=A[j];
-				i=j;
-				j=j/2;
-			}
-			A[i]=item;
+			write(cout, secuencia, tam, h1-1, h2-1);
+			cin.ignore();
 		}
-		temp=A[1];
-		A[1]=A[k];
-		A[k]=temp;
+		else
+			contador_++;
+
+		if (h1 == tam)
+		{
+			h = h1;
+		}
+		else if (secuencia[h1-1] > secuencia[h2-1])
+		{
+			h = h1;
+		}
+		else
+		{
+			h = h2;
+		}
+
+		if (metodo == 1)
+		{
+			write(cout, secuencia, tam, h-1, i-1);
+			cin.ignore();
+		}
+		else
+			contador_++;
+
+		if (secuencia[h-1] <= x)
+		{
+			break;
+		}
+		else
+		{
+			secuencia[i-1] = secuencia[h-1];
+			secuencia[h-1] = x;
+			i = h;
+		}
 	}
-	cout<<"El orden es:"<<endl;
-	for(i=1;i<=n;i++)
-	cout<<A[i] << endl;
-	return 0;
- *
- *
- *
-# heapify
-for i = n/2:1, sink(a,i,n)
-→ invariant: a[1,n] in heap order
-
-# sortdown
-for i = 1:n,
-	swap a[1,n-i+1]
-	sink(a,1,n-i)
-	→ invariant: a[n-i+1,n] in final position
-end
-
-# sink from i in a[1..n]
-function sink(a,i,n):
-	# {lc,rc,mc} = {left,right,max} child index
-	lc = 2*i
-	if lc > n, return # no children
-	rc = lc + 1
-	mc = (rc > n) ? lc : (a[lc] > a[rc]) ? lc : rc
-	if a[i] >= a[mc], return # heap ordered
-	swap a[i,mc]
-	sink(a,mc,n)
-*/
 }
 
 template <class T>
@@ -140,6 +137,43 @@ ostream& heap<T>::write(ostream& os, T* secuencia, int tam, int j, int k)
 		else
 			cout << "[" << secuencia[i] << "] ";
 	}
+	os << endl;
+	return os;
+}
+
+template <class T>
+ostream& heap<T>::write2(ostream& os, T* secuencia, int ini, int fin, int ins)
+{
+	if (ins == 1){
+		for (int i = 0; i < ini; i++)
+		{
+			if (i != ini-1)
+				cout << secuencia[i] << " ";
+			else
+				cout << secuencia[i];
+		}
+		cout << " ";
+	}
+
+	cout << "\33[4m";
+	for (int i = ini; i <= fin; i++)
+	{
+		if (i != fin)
+			cout << secuencia[i] << " ";
+		else
+			cout << secuencia[i];
+	}
+	cout << "\33[0m" << " ";
+
+	for (int i = fin+1; i < tam_; i++)
+	{
+		if (i != tam_-1)
+			cout << secuencia[i] << " ";
+		else
+			cout << secuencia[i];
+	}
+
+	os << endl;
 	os << endl;
 	return os;
 }
