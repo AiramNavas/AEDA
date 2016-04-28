@@ -45,8 +45,8 @@ int main()
  * Heap...........=7
 */
 
-	int nPruebas = 5;
-	int tam = 100;
+	int nPruebas = 6;
+	int tam = 5;
 	int metodo = 2;
 	int algoritmo = 7;
 
@@ -56,7 +56,7 @@ int main()
 	Ordenacion<DNI> ordena(nPruebas);
 	DNI secuencia[tam];
 
-	cout << "Predione ENTER para comenzar." << endl;
+	cout << "Presione ENTER para comenzar." << endl;
 	cin.ignore();
 
 	if (metodo == 1)
@@ -72,9 +72,9 @@ int main()
 		{
 			generar_s_aleatorio(secuencia, tam, VALOR_MIN, VALOR_MAX);
 			ordena.estadistica(secuencia, tam, i, nPruebas);
-			for(int k = 0; k < tam; k++)
-				cout << secuencia[k] << "  ";
-			cout << "Prueba" << i+1 << endl;
+//			for(int k = 0; k < tam; k++)
+//				cout << secuencia[k] << "  ";
+//			cout << "Prueba" << i+1 << endl;
 		}
 		ordena.write(cout);
 	}		

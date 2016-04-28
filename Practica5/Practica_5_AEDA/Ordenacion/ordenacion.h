@@ -227,7 +227,7 @@ string Ordenacion<T>::algoritmo(int algoritmo)
 			break;
 		case 4:  sa = "MergeSort";
 			break;
-		case 5:  sa = "Slection";
+		case 5:  sa = "Selection";
 			break;
 		case 6:  sa = "HeapSort";
 			break;
@@ -259,6 +259,7 @@ ostream& Ordenacion<T>::write(ostream &os)
 			os << ME_[i][j] << "\t";
 		os << endl;
 	}
+	os << endl;
 
 	return os;
 }
