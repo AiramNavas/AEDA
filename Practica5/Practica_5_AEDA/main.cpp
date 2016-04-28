@@ -12,10 +12,7 @@ using namespace std;
 template <class T>
 void generar_s_aleatorio(T* secuencia, int tam, int inicio, int final)
 {
-	static int seed = 0;
-
-	if (seed==0)
-		seed = time(0);
+	static int seed = time(0);
 
 	srand(seed++);
 	// Formula a + rand() % (b-a+1)
@@ -49,9 +46,9 @@ int main()
 */
 
 	int nPruebas = 5;
-	int tam = 75;
+	int tam = 100;
 	int metodo = 2;
-	int algoritmo = 4;
+	int algoritmo = 7;
 
 
 //////////////////////////////////////////////////////////		PRACTICA 5
