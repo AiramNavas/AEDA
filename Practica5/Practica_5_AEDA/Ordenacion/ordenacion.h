@@ -34,6 +34,7 @@ class Ordenacion {
 		void demostracion(T* sentencia, int tam, int algoritmo);
 		void estadistica(T* sentencia, int tam, int i, int nPruebas);
 
+		string algoritmo(int algoritmo);
 		ostream& write(ostream& os);
 };
 
@@ -210,6 +211,31 @@ void Ordenacion<T>::estadistica(T* secuencia, int tam, int i, int nPruebas)
 }
 
 template <class T>
+string Ordenacion<T>::algoritmo(int algoritmo)
+{
+	string sa;
+
+	switch (algoritmo)
+	{
+		case 0:  sa = "Insercion";
+			break;
+		case 1:  sa = "Burbuja\t";
+			break;
+		case 2:  sa = "ShellSort";
+			break;
+		case 3:  sa = "QuickSort";
+			break;
+		case 4:  sa = "MergeSort";
+			break;
+		case 5:  sa = "Slection";
+			break;
+		case 6:  sa = "HeapSort";
+			break;
+	}
+	return sa;
+}
+
+template <class T>
 ostream& Ordenacion<T>::write(ostream &os)
 {
 	os << endl;
@@ -227,7 +253,8 @@ ostream& Ordenacion<T>::write(ostream &os)
 	os << endl;
 
 	for (int i = 0; i < 7; i++){
-		os << "Método " << i+1 << "\t";
+//		os << "Método " << i+1 << "\t";
+		os << algoritmo(i) << "\t";
 		for (int j = 0; j < 3; j++)
 			os << ME_[i][j] << "\t";
 		os << endl;

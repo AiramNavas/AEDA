@@ -94,14 +94,12 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 		else
 			contador_++;
 
-		if (i <= f)
+		if (i < f)
 		{
 			if (metodo == 1){
 				write(cout, secuencia, ini, fin, i, f, p);
 				cin.ignore();
 			}
-			else
-				contador_++;
 
 			T temp = secuencia[i];
 			secuencia[i] = secuencia[f];
@@ -112,6 +110,15 @@ void quickSort<T>::do_quickSort(T* secuencia, int ini, int fin, int metodo)
 			if (metodo == 1){
 				write(cout, secuencia, 0, tam_-1, -1, -1, -1);
 				cin.ignore();
+			}
+		}
+		else if (i == f)
+		{
+			i++;
+			f--;
+			if (metodo == 1){
+				write(cout, secuencia, 0, tam_-1, -1, -1, -1);
+				cout << endl;
 			}
 		}
 	}
