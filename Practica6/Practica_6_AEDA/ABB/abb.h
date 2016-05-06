@@ -11,6 +11,8 @@ class ArbolBB
 {
 	private:
 		NodoBB<T> *raiz_;
+		int* M_;
+		float* ME_;
 
 	public:
 		ArbolBB();
@@ -18,6 +20,9 @@ class ArbolBB
 
 		void Insertar(T clave);
 		void Eliminar(T clave);
+		void Buscar(T clave);
+
+		void Estadistica(T* secuencia, int N, int P);
 
 		ostream& write(ostream& os);
 };
@@ -35,6 +40,18 @@ template <class T>
 void ArbolBB<T>::Insertar(T clave)
 {
 	raiz_->Insertar(raiz_, clave);
+}
+
+template <class T>
+void ArbolBB<T>::Eliminar(T clave)
+{
+	raiz_->Eliminar(raiz_, clave);
+}
+
+template <class T>
+void ArbolBB<T>::Buscar(T clave)
+{
+	raiz_->Buscar(raiz_, clave);
 }
 
 //template <class T>
@@ -56,46 +73,23 @@ void ArbolBB<T>::Insertar(T clave)
 //	return BuscarRama(nodo->dcho, clave);
 //}
 
-
 template <class T>
-void ArbolBB<T>::Eliminar(T clave)
+void ArbolBB<T>::Estadistica(T* secuencia, int N, int P)
 {
-	raiz_->Eliminar(raiz_, clave);
+	M_ = new int[P];
+
+	for (int i = 0; i < N; i++)
+		Insertar(secuencia[i]);
+//	for (int i = 0; i < N; i++)
+//		Buscar(secuencia[i]);
+
+//	for (int i = N; i < N+P; i++)
+//		Buscar(secuencia[i]);
+
+	for (int i = 0; i < N; i++)
+		Eliminar(secuencia[i]);
+	cout << endl;
 }
-
-//template <class T>
-//void ArbolBB<T>::EliminarRama(nodoBB* &nodo, T clave)
-//{
-//	if (nodo == NULL) return;
-
-//	if (clave < nodo->clave)
-//		EliminarRama(nodo->izdo, clave);
-//	else{
-//		if (clave > nodo->clave)
-//			EliminarRama(nodo->dcho, clave);
-//		else {
-//			nodoBB* &Eliminado = nodo;
-
-//			if (nodo->dcho == NULL) {
-//				nodo = nodo->izdo;
-//				delete (Eliminado);
-//			}
-//			else if (nodo->izdo == NULL) {
-//				nodo = nodo->dcho;
-//				delete (Eliminado);
-//			}
-//			else {
-//				nodoBB* aux = nodo->izdo ;
-//				while (aux->dcho != NULL)
-//					aux = aux->dcho;
-//				Eliminado->clave = aux->clave;
-//				Eliminado->dato = aux->dato;
-//				EliminarRama (aux, aux->clave);
-//			}
-//			delete(nodo);
-//		}
-//	}
-//}
 
 template <class T>
 ostream& ArbolBB<T>::write(ostream& os)

@@ -25,12 +25,13 @@ class NodoBB
 	public:
 		NodoBB();
 		NodoBB(T clave);
-//		NodoBB(const NodoBB<T>* n);
 		~NodoBB();
 
 		void Insertar(NodoBB<T>* &nodo, T clave);
-		void Buscar(T clave);
 		void Eliminar(NodoBB<T>* &nodo, T clave);
+		void Buscar(NodoBB<T>* &nodo, T clave);
+
+		void Estadistica(T* secuencia, int N, int P);
 
 		void pre_write(NodoBB<T>* &nodo, int k, QMap<int, QList<L_type<T> > > &mapa);
 		ostream& write_mapa(ostream& os, QMap<int, QList<L_type<T> > > &mapa);
@@ -80,6 +81,12 @@ void NodoBB<T>::Insertar(NodoBB<T>* &nodo, T clave)
 template <class T>
 void NodoBB<T>::Eliminar(NodoBB<T>* &nodo, T clave)
 {
+	if (nodo == NULL)
+	{
+		cout << "No existe en el árbol." << endl;
+		return;
+	}
+
 	int twin = 0;
 	if(nodo->dato_ < clave)
 		Eliminar(nodo->dch_, clave);
@@ -148,9 +155,21 @@ void NodoBB<T>::Eliminar(NodoBB<T>* &nodo, T clave)
 }
 
 template <class T>
+void NodoBB<T>::Buscar(NodoBB<T>* &nodo, T clave)
+{
+
+}
+
+template <class T>
+void NodoBB<T>::Estadistica(T* secuencia, int N, int P)
+{
+	cout << "AAAAAAA" << endl;
+}
+
+template <class T>
 void NodoBB<T>::pre_write(NodoBB<T>* &nodo, int k, QMap<int, QList<L_type<T> > > &mapa)
 {
-	L_type<int> nodoD;
+	L_type<T> nodoD;
 	nodoD.clave = nodo->dato_;
 	nodoD.null = 1;
 	mapa[k].append(nodoD);
