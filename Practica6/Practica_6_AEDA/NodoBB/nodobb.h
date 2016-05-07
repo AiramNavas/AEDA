@@ -19,19 +19,21 @@ class NodoBB
 {
 	public:
 		T dato_;
-		NodoBB<T>* padre_;
 		NodoBB<T>* izq_;
 		NodoBB<T>* dch_;
+		int comparaciones_;
 	public:
 		NodoBB();
 		NodoBB(T clave);
 		~NodoBB();
 
 		void Insertar(NodoBB<T>* &nodo, T clave);
-		void Eliminar(NodoBB<T>* &nodo, T clave);
 		void Buscar(NodoBB<T>* &nodo, T clave);
+		void BuscarRecursivo(NodoBB<T>* &nodo, T clave);
+		void Eliminar(NodoBB<T>* &nodo, T clave);
+		void sustituye(NodoBB<T>* &eliminado, NodoBB<T>* &sust);
 
-		void Estadistica(T* secuencia, int N, int P);
+		int get_comparaciones();
 
 		void pre_write(NodoBB<T>* &nodo, int k, QMap<int, QList<L_type<T> > > &mapa);
 		ostream& write_mapa(ostream& os, QMap<int, QList<L_type<T> > > &mapa);
@@ -41,22 +43,30 @@ class NodoBB
 template <class T>
 NodoBB<T>::NodoBB():
 	dato_(0),
-	padre_(NULL),
 	izq_(NULL),
-	dch_(NULL)
+	dch_(NULL),
+	comparaciones_(0)
 {}
 
 template <class T>
 NodoBB<T>::NodoBB(T clave):
 	dato_(clave),
-	padre_(NULL),
 	izq_(NULL),
-	dch_(NULL)
+	dch_(NULL),
+	comparaciones_(0)
 {}
 
 template <class T>
 NodoBB<T>::~NodoBB()
-{}
+{
+	comparaciones_ = 0;
+}
+
+template <class T>
+int NodoBB<T>::get_comparaciones()
+{
+	return comparaciones_;
+}
 
 template <class T>
 void NodoBB<T>::Insertar(NodoBB<T>* &nodo, T clave)
@@ -68,102 +78,78 @@ void NodoBB<T>::Insertar(NodoBB<T>* &nodo, T clave)
 		if (clave < nodo->dato_)
 		{
 			Insertar(nodo->izq_, clave);
-			nodo->izq_->padre_ = nodo;
 		}
 		else
 		{
 			Insertar(nodo->dch_, clave);
-			nodo->dch_->padre_ = nodo;
 		}
-	}
-}
-
-template <class T>
-void NodoBB<T>::Eliminar(NodoBB<T>* &nodo, T clave)
-{
-	if (nodo == NULL)
-	{
-		cout << "No existe en el árbol." << endl;
-		return;
-	}
-
-	int twin = 0;
-	if(nodo->dato_ < clave)
-		Eliminar(nodo->dch_, clave);
-	else if(nodo->dato_ > clave)
-		Eliminar(nodo->izq_, clave);
-	else
-	{
-		if(nodo->izq_ == NULL && nodo->dch_ != NULL)
-		{
-			// Si solo tiene el hijo DERECHO
-			if (nodo->padre_ != NULL){
-				if(nodo->padre_->dato_ < nodo->dato_)
-					nodo->padre_->dch_ = nodo->dch_;
-				else
-					nodo->padre_->izq_ = nodo->dch_;
-				nodo = NULL;
-			}
-			else
-			{
-				nodo = nodo->dch_;
-				twin++;
-			}
-		}
-		else if(nodo->izq_ != NULL && nodo->dch_ == NULL)
-		{
-			// Si solo tiene el hijo IZQUIERDO
-			if (nodo->padre_ != NULL){
-				if(nodo->padre_->dato_ > nodo->dato_)
-					nodo->padre_->izq_ = nodo->izq_;
-				else
-					nodo->padre_->dch_ = nodo->izq_;
-				nodo = NULL;
-			}
-			else
-			{
-				nodo = nodo->izq_;
-				twin++;
-			}
-		}
-		else if(nodo->izq_ != NULL && nodo->dch_ != NULL)
-		{
-			// Si tiene AMBOS hijos
-			NodoBB<T>* aux = nodo->izq_;
-			while (aux->dch_ != NULL)
-				aux = aux->dch_;
-			T Caux = aux->dato_;
-			Eliminar(aux, aux->dato_);
-			nodo->dato_ = Caux;
-			twin++;
-		}
-		else
-		{
-			// Si es una HOJA
-			if (nodo->padre_ != NULL){
-				if (nodo->padre_->dato_ > nodo->dato_)
-					nodo->padre_->izq_ = NULL;
-				else
-					nodo->padre_->dch_ = NULL;
-			}
-			else
-				nodo = NULL;
-		}
-		if (twin == 0)
-			delete (nodo);
 	}
 }
 
 template <class T>
 void NodoBB<T>::Buscar(NodoBB<T>* &nodo, T clave)
 {
+	comparaciones_ = 0;
+	BuscarRecursivo(nodo, clave);
+}
+
+template <class T>
+void NodoBB<T>::BuscarRecursivo(NodoBB<T>* &nodo, T clave)
+{
+	if(nodo == NULL)
+		return;
+
+	comparaciones_++;
+
+	if (clave == nodo->dato_)
+	{
+		return;
+	}
+	comparaciones_++;
+	if (clave > nodo->dato_)
+	{
+		BuscarRecursivo(nodo->dch_, clave);
+	}
+	else
+	{
+		BuscarRecursivo(nodo->izq_, clave);
+	}
 
 }
 
 template <class T>
-void NodoBB<T>::Estadistica(T* secuencia, int N, int P)
-{
-	cout << "AAAAAAA" << endl;
+void NodoBB<T>::Eliminar(NodoBB<T>* &nodo, T clave) {
+	if (nodo == NULL)
+	{
+		cout << "No existe en el árbol." << endl;
+		return;
+	}
+
+	if (clave < nodo->dato_)
+		Eliminar(nodo->izq_, clave);
+	else if (clave > nodo->dato_)
+		Eliminar(nodo->dch_, clave);
+	else {
+		NodoBB<T>* Eliminado = nodo;
+		if (nodo->dch_ == NULL)
+			nodo = nodo->izq_;
+		else if (nodo->izq_ == NULL)
+			nodo = nodo->dch_;
+		else
+			sustituye(Eliminado, nodo->izq_);
+		delete (Eliminado);
+	}
+}
+
+template <class T>
+void NodoBB<T>::sustituye(NodoBB<T>* &eliminado, NodoBB<T>* &sust) {
+	if (sust->dch_ != NULL)
+		sustituye(eliminado, sust->dch_);
+	else {
+		eliminado->dato_ = sust->dato_;
+		eliminado = sust;
+		sust = sust->izq_;
+	}
 }
 
 template <class T>

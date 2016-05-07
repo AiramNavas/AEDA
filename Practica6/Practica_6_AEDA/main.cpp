@@ -88,13 +88,12 @@ void menu_estadistica()
 							cin >> N;
 							cout << "Introduzca el número de pruebas: " << endl;
 							cin >> P;
-							DNI secuencia[N];
-							for(int i = 0; i < P; i++){
-								generar_s_aleatorio(secuencia, N*2, VALOR_MIN, VALOR_MAX);
-								arbol.Estadistica(secuencia, N, P);
-							}
+							DNI secuencia[N*2];
+							generar_s_aleatorio(secuencia, N*2, VALOR_MIN, VALOR_MAX);
+							arbol.Estadistica(secuencia, N, P);
 							system("clear");
-							arbol.write(cout);
+							arbol.write_estadistica(cout,N,P);
+							cout << endl;
 					break;
 			}
 	}
