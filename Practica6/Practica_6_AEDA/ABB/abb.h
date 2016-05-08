@@ -92,7 +92,7 @@ float ArbolBB<T>::get_med(int* &V, int P)
 	{
 		min += V[i];
 	}
-	return min/P;
+	return (float)min/P;
 }
 
 template <class T>
@@ -119,9 +119,6 @@ void ArbolBB<T>::Estadistica(T* secuencia, int N, int P)
 		MI_[cnt] = raiz_->get_comparaciones();
 		cnt++;
 	}
-
-	for (int i = 0; i < P; i++)
-		cout << "IN  " << MI_[i] << endl;
 
 	MP_[0] = get_min(MB_,P);
 	MP_[1] = get_med(MB_,P);
