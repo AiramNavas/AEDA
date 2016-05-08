@@ -115,7 +115,7 @@ void ArbolBB<T>::Estadistica(T* secuencia, int N, int P)
 	int cnt = 0;
 	for (int i = N; i < N+P; i++)
 	{
-		Buscar(secuencia[P+rand()%(N-P)]);
+		Buscar(secuencia[N+rand()%(N*2-N)]);
 		MI_[cnt] = raiz_->get_comparaciones();
 		cnt++;
 	}

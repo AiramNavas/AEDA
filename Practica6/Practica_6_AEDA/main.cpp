@@ -51,7 +51,7 @@ void menu_demostracion()
 		else
 			switch (i)
 			{
-				case 1:		cout << "Instertar: ";
+				case 1:		cout << "Insertar: ";
 							cin >> num;
 							arbol.Insertar(num);
 							arbol.write(cout);

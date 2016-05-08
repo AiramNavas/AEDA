@@ -184,7 +184,7 @@ void NodoBB<T>::pre_write(NodoBB<T>* &nodo, int k, QMap<int, QList<L_type<T> > >
 }
 
 template <class T>
-ostream& NodoBB<T>::write_mapa(ostream& os, QMap<int, QList<L_type<T> > > &mapa)
+ostream& NodoBB<T>::write_mapa(ostream& os, QMap<int,QList<L_type<T> > > &mapa)
 {
 	for(int i = 0; i < mapa.size(); i++)
 	{
