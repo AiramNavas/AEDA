@@ -40,7 +40,7 @@ class NodoAVL
 		void Buscar(NodoAVL<T>* &nodo, T clave);
 		void BuscarRecursivo(NodoAVL<T>* &nodo, T clave);
 
-		void Eliminar_Rama(NodoAVL<T>* &nodo, T clave, bool decrece);
+		void Eliminar_Rama(NodoAVL<T>* &nodo, T clave, bool &decrece);
 		void Eliminar_re_balancea_izq(NodoAVL<T>* &nodo, bool &decrece);
 		void Eliminar_re_balancea_dch(NodoAVL<T>* &nodo, bool &decrece);
 		void sustituye(NodoAVL<T>* &eliminado, NodoAVL<T>* &sust, bool &decrece);
@@ -149,7 +149,7 @@ void NodoAVL<T>::Rotacion_DI(NodoAVL* &nodo)
 	else nodo1->bal_ = 0;
 	if (nodo2->bal_ == -1)
 		nodo->bal_ = 1;
-				else nodo->bal_ = 0;
+	else nodo->bal_ = 0;
 	nodo2->bal_ = 0;
 	nodo = nodo2;
 }
@@ -201,15 +201,14 @@ void NodoAVL<T>::Insertar_re_balancea_dch(NodoAVL<T>* &nodo, bool &crece)
 					crece = false;
 			break;
 
-		case 0:		nodo->bal_ = 1;
+		case 0:		nodo->bal_ = -1;
 			break;
 
 		case -1:	NodoAVL<T>* nodo1 = nodo->dch_;
-					if (nodo1->bal_ == 1)
+					if (nodo1->bal_ == -1)
 						Rotacion_DD(nodo);
 					else Rotacion_DI(nodo);
 					crece = false;
-			break;
 	}
 }
 
@@ -244,7 +243,7 @@ void NodoAVL<T>::BuscarRecursivo(NodoAVL<T>* &nodo, T clave)
 }
 
 template <class T>
-void NodoAVL<T>::Eliminar_Rama(NodoAVL<T>* &nodo, T clave, bool decrece) {
+void NodoAVL<T>::Eliminar_Rama(NodoAVL<T>* &nodo, T clave, bool &decrece) {
 	if (nodo == NULL) return;
 	if (clave < nodo->dato_) {
 		Eliminar_Rama(nodo->izq_, clave, decrece);
