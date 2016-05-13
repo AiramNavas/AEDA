@@ -28,10 +28,10 @@ class NodoAVL
 		NodoAVL(T clave);
 		~NodoAVL();
 
-		void Rotacion_II(NodoAVL* &nodo);
-		void Rotacion_DD(NodoAVL* &nodo);
-		void Rotacion_ID(NodoAVL* &nodo);
-		void Rotacion_DI(NodoAVL* &nodo);
+		void Rotacion_II(NodoAVL<T>* &nodo);
+		void Rotacion_DD(NodoAVL<T>* &nodo);
+		void Rotacion_ID(NodoAVL<T>* &nodo);
+		void Rotacion_DI(NodoAVL<T>* &nodo);
 
 		void Insertar_bal(NodoAVL<T>* &nodo, NodoAVL<T>* nuevo, bool& crece);
 		void Insertar_re_balancea_izq(NodoAVL<T>* &nodo, bool &crece);
@@ -83,7 +83,7 @@ int NodoAVL<T>::get_comparaciones()
 }
 
 template <class T>
-void NodoAVL<T>::Rotacion_II(NodoAVL* &nodo)
+void NodoAVL<T>::Rotacion_II(NodoAVL<T>* &nodo)
 {
 	NodoAVL<T>* nodo1 = nodo->izq_;
 	nodo->izq_ = nodo1->dch_;
@@ -100,7 +100,7 @@ void NodoAVL<T>::Rotacion_II(NodoAVL* &nodo)
 }
 
 template <class T>
-void NodoAVL<T>::Rotacion_DD(NodoAVL* &nodo)
+void NodoAVL<T>::Rotacion_DD(NodoAVL<T>* &nodo)
 {
 	NodoAVL<T>* nodo1 = nodo->dch_;
 	nodo->dch_ = nodo1->izq_;
@@ -117,7 +117,7 @@ void NodoAVL<T>::Rotacion_DD(NodoAVL* &nodo)
 }
 
 template <class T>
-void NodoAVL<T>::Rotacion_ID(NodoAVL* &nodo)
+void NodoAVL<T>::Rotacion_ID(NodoAVL<T>* &nodo)
 {
 	NodoAVL<T>* nodo1 = nodo->izq_;
 	NodoAVL<T>* nodo2 = nodo1->dch_;
@@ -136,7 +136,7 @@ void NodoAVL<T>::Rotacion_ID(NodoAVL* &nodo)
 }
 
 template <class T>
-void NodoAVL<T>::Rotacion_DI(NodoAVL* &nodo)
+void NodoAVL<T>::Rotacion_DI(NodoAVL<T>* &nodo)
 {
 	NodoAVL<T>* nodo1 = nodo->dch_;
 	NodoAVL<T>* nodo2 = nodo1->izq_;
