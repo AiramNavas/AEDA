@@ -47,8 +47,8 @@ int main()
 
 	int nPruebas = 5;
 	int tam = 8;
-	int metodo = 2;
-	int algoritmo = 7;
+	int metodo = 1;
+	int algoritmo = 5;
 
 
 //////////////////////////////////////////////////////////		PRACTICA 5
